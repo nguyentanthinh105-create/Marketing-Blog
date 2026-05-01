@@ -496,11 +496,38 @@
     footer {
       background: var(--surface);
       border-top: 1px solid var(--border);
-      padding: 32px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
+      padding: 40px 0 32px;
     }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 36px; display: flex; align-items: center;
+      justify-content: space-between; background: var(--surface);
+      gap: 24px; margin-bottom: 32px;
+    }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 80px; width: auto; display: block; }
+    .footer-logo-placeholder {
+      height: 80px; width: 80px; background: var(--text-primary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name  { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
 /* ── BLOG STYLES FROM MY-BLOGS.HTML ── */
 .blog-grid {
   display: grid;
@@ -938,7 +965,35 @@
 <div id="myblog-placeholder"></div>
 
 <footer>
-  <div id="footer-placeholder"></div>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · All rights reserved</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -948,13 +1003,6 @@ function switchTab(id, btn) {
   document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
 }
-
-// 1. GIỮ NGUYÊN FETCH FOOTER
-fetch('footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  });
 
 // 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
 const myBlogHTML = `
