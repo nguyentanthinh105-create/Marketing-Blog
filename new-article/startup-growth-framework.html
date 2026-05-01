@@ -696,6 +696,107 @@ style="max-width: 50%">
 <footer>
   <p>Fullstack Growth Marketing · Framework PMF → Data → PLG</p>
 </footer>
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
+// 1. GIỮ NGUYÊN FETCH FOOTER
+fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('footer-placeholder').innerHTML = data;
+  });
+
+// 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
+const myBlogHTML = `
+  <div class="hero" style="padding: 40px 32px 24px; max-width: 860px;">
+    <h2 style="font-size: 32px; margin-bottom: 8px;">Các bài blog của tôi</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 16px;">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+  </div>
+  <div class="content" style="max-width: 860px; margin: 0 auto; padding: 0 32px 60px;">
+    <div id="blog-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+`;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
+
+// 3. LOGIC LẤY META TRỰC TIẾP TỪ NỘI DUNG FILE
+const GITHUB_USER    = 'nguyentanthinh105-create';
+const GITHUB_REPO    = 'Marketing-Blog';
+const ARTICLES_FOLDER = 'new-article';
+const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+async function loadBlogs() {
+  const stateEl = document.getElementById('blog-state');
+  const gridEl  = document.getElementById('blog-grid');
+
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`GitHub API error`);
+
+    const files = await res.json();
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+
+    if (articles.length === 0) {
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
+      return;
+    }
+
+    stateEl.style.display = 'none';
+    gridEl.style.display  = 'grid';
+
+    // Xử lý song song để tăng tốc độ tải trang
+    const blogPromises = articles.map(async (file) => {
+      try {
+        const response = await fetch(BASE_URL + file.name);
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+
+        // TRUY XUẤT META CHÍNH XÁC TỪ FILE
+        const category = doc.querySelector('meta[name="category"]')?.getAttribute('content') || "Chưa phân loại";
+        const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || "Không có mô tả cho bài viết này.";
+        const title = doc.title || file.name.replace('.html', '');
+
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = BASE_URL + file.name;
+        card.target    = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">
+            ${description}
+          </p>
+          <div class="blog-card-footer">
+            <span class="blog-card-arrow">Đọc thêm →</span>
+          </div>`;
+        return card;
+      } catch (e) {
+        console.error("Lỗi đọc meta của file:", file.name);
+        return null;
+      }
+    });
+
+    const cards = await Promise.all(blogPromises);
+    cards.forEach(card => {
+      if (card) gridEl.appendChild(card);
+    });
+
+  } catch (err) {
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
+  }
+}
+
+loadBlogs();
+</script>
 </body>
 </html>
