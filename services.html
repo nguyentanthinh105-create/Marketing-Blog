@@ -977,11 +977,7 @@
 
 <footer>
   <div id="footer-placeholder"></div>
-fetch('footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  });
+
 </footer>
 
 <script>
@@ -991,6 +987,11 @@ fetch('footer.html')
     document.getElementById('tab-' + id).classList.add('active');
     btn.classList.add('active');
   }
+	fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('footer-placeholder').innerHTML = data;
+  });
 </script>
 </body>
 </html>
