@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" type="image/png" href="./logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dịch Vụ – Fullstack Growth Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fdf8f6;
+      --surface: #ffffff;
+      --pink-50:  #fff5f2;
+      --pink-100: #ffe8e0;
+      --pink-200: #ffc9b5;
+      --pink-400: #f97247;
+      --pink-500: #f05a28;
+      --pink-600: #d04418;
+      --pink-700: #9e3010;
+      --text-primary:   #1c1410;
+      --text-secondary: #5a3d30;
+      --text-muted:     #a07060;
+      --border:         #f0d8cc;
+      --h1: 48px;
+      --h2: 36px;
+      --body: 16px;
+
+      /* Blog specific colors */
+      --green-100: #eef5ee;
+      --green-200: #d4ebcf;
+      --green-300: #a8d5a0;
+      --green-500: #3a8c3f;
+      --green-600: #2d7032;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-badge {
+      background: var(--pink-500);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .nav-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 32px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    h1 {
+      font-size: var(--h1);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      padding-bottom: 15px;
+    }
+    h1 em { color: var(--pink-500); font-style: italic; }
+    .hero-sub { font-size: 16px; color: var(--text-secondary); }
+    .hero-right {
+      background: var(--pink-50);
+      border: 1px solid var(--pink-200);
+      border-radius: 14px;
+      padding: 28px 26px;
+    }
+    .stat-row {
+      display: flex; gap: 12px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--pink-200); margin-bottom: 14px;
+    }
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .stat-text strong { display: block; font-size: 14px; color: var(--text-primary); }
+    .stat-text span { font-size: 13px; color: var(--text-muted); }
+
+    /* ── SERVICES & TABS ── */
+    .services-wrap { max-width: 860px; margin: 0 auto; padding: 0 32px 80px; }
+    .tabs-nav { display: flex; gap: 8px; margin-bottom: 28px; border-bottom: 2px solid var(--pink-100); }
+    .tab-btn {
+      background: none; border: none; padding: 10px 16px; cursor: pointer;
+      font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent;
+    }
+    .tab-btn.active { color: var(--pink-500); border-bottom-color: var(--pink-500); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeUp .3s ease both; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .block { background: var(--pink-50); border: 1px solid var(--pink-100); border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; }
+    .block-accent { border-left: 4px solid var(--pink-400); background: var(--pink-100); padding: 18px 22px; margin-bottom: 18px; }
+    .item-row { display: flex; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--pink-100); border-radius: 8px; margin-bottom: 10px; }
+    .output-tag { display: inline-block; background: var(--pink-100); color: var(--pink-700); font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+
+    /* ── BLOG SECTION STYLES ── */
+    .blog-section { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; border-top: 1px solid var(--border); }
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .blog-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; text-decoration: none; color: inherit; transition: all .2s;
+    }
+    .blog-card:hover { border-color: var(--green-300); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.05); }
+    .blog-card h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-primary); }
+    .blog-card-tag { font-size: 10px; font-weight: 700; color: var(--green-500); text-transform: uppercase; margin-bottom: 8px; }
+    
+    .state-block { background: var(--green-100); padding: 30px; text-align: center; border-radius: 10px; }
+    .spinner { width: 24px; height: 24px; border: 2px solid #ddd; border-top-color: var(--green-500); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 10px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 32px; text-align: center; color: var(--text-muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="nav-badge">Entity Studio</span>
+      <span class="nav-label">Fullstack Growth Marketing</span>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-left">
+    <h1>Tăng trưởng <em>đúng nền</em>,<br>không đốt ngân sách</h1>
+    <p class="hero-sub">Chúng tôi đồng hành toàn bộ hành trình tăng trưởng của thương hiệu bạn.</p>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <div class="stat-text"><strong>Doanh nghiệp SME</strong><span>Làm marketing bài bản</span></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-text"><strong>Startup 0 → 1</strong><span>Build hệ thống từ đầu</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="services-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('chien-luoc', this)">Chiến lược</button>
+    <button class="tab-btn" onclick="switchTab('execution', this)">Execution</button>
+  </div>
+
+  <div id="tab-chien-luoc" class="tab-panel active">
+    <div class="block-accent"><p>Xây hệ thống tư duy tăng trưởng trước khi triển khai.</p></div>
+    <div class="item-row">
+        <div><strong>Chiến lược tổng thể</strong>Lộ trình 3-6 tháng <span class="output-tag">Báo cáo</span></div>
+    </div>
+  </div>
+
+  <div id="tab-execution" class="tab-panel">
+    <div class="block-accent"><p>Triển khai đúng, tối ưu liên tục.</p></div>
+    <div class="item-row">
+        <div><strong>Ads & Content</strong>Tối ưu CPL/CPA <span class="output-tag">Performance</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG SECTION (Merged from my-blogs.html) -->
+<div class="blog-section">
+    <div class="section-header" style="margin-bottom: 24px;">
+        <div class="section-label" style="color: var(--green-500); font-weight: 700; font-size: 11px; text-transform: uppercase;">Insights</div>
+        <h2 style="font-size: 28px;">Bài viết mới nhất</h2>
+        <p id="post-count" style="font-size: 13px; color: var(--text-muted);">Đang kiểm tra bài viết...</p>
+    </div>
+
+    <div id="blog-state" class="state-block">
+        <div class="spinner"></div>
+        <div class="state-title">Đang tải blog...</div>
+    </div>
+
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+</div>
+
+<footer>
+    <p>© 2024 Entity Studio. All rights reserved.</p>
+</footer>
+
+<script>
+  // Tab Switch Logic
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Blog Fetch Logic (Merged straight in)
+  const GITHUB_USER    = 'nguyentanthinh105-create';
+  const GITHUB_REPO    = 'Marketing-Blog';
+  const ARTICLES_FOLDER = 'new-article';
+  const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+  const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+  async function loadBlogs() {
+    const stateEl = document.getElementById('blog-state');
+    const gridEl  = document.getElementById('blog-grid');
+    const countEl = document.getElementById('post-count');
+
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`Lỗi kết nối GitHub`);
+
+      const files    = await res.json();
+      const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+
+      if (articles.length === 0) {
+        stateEl.innerHTML = `<div>Chưa có bài viết nào được xuất bản.</div>`;
+        return;
+      }
+
+      countEl.textContent = `${articles.length} bài viết chia sẻ kinh nghiệm`;
+      stateEl.style.display = 'none';
+      gridEl.style.display  = 'grid';
+
+      articles.forEach(file => {
+        const raw   = file.name.replace('.html', '');
+        const title = raw.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = BASE_URL + file.name;
+        card.target    = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">Marketing Article</div>
+          <h3>${title}</h3>
+          <div style="font-size: 12px; color: #888;">Xem chi tiết →</div>
+        `;
+        gridEl.appendChild(card);
+      });
+    } catch (err) {
+      stateEl.innerHTML = `<div style="color:red;">Không thể tải danh sách bài viết lúc này.</div>`;
+    }
+  }
+
+  // Khởi chạy ngay
+  loadBlogs();
+</script>
+
+</body>
+</html>
