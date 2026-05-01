@@ -861,7 +861,92 @@
   </div>
 </div><!-- end bottom-section -->
 
-<div id="myblog-placeholder"></div>
+<!-- HERO -->
+<div class="hero">
+  <h1>Các bài blog của tôi</h1>
+  <p class="hero-sub">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+  <div class="hero-meta">
+    <span class="dot">·</span>
+    <span class="hero-meta-item" id="post-count">Đang tải...</span>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div id="blog-state" class="state-block">
+    <div class="spinner"></div>
+    <div class="state-title">Đang tải bài viết...</div>
+    <div>Chờ xíu nha</div>
+  </div>
+  <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+</div>
+
+<script>
+  const GITHUB_USER    = 'nguyentanthinh105-create';
+  const GITHUB_REPO    = 'Marketing-Blog';
+  const ARTICLES_FOLDER = 'new-article';
+  const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+  const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+  async function loadBlogs() {
+    const stateEl = document.getElementById('blog-state');
+    const gridEl  = document.getElementById('blog-grid');
+    const countEl = document.getElementById('post-count');
+
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
+
+      const files    = await res.json();
+      const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+
+      if (articles.length === 0) {
+        stateEl.innerHTML = `
+          <div class="state-title">Chưa có bài viết nào</div>
+          <div>Thêm file .html vào thư mục <code>${ARTICLES_FOLDER}</code> trên GitHub.</div>`;
+        return;
+      }
+
+      countEl.textContent = `${articles.length} bài viết`;
+      stateEl.style.display = 'none';
+      gridEl.style.display  = 'grid';
+
+      articles.forEach(file => {
+        const raw   = file.name.replace('.html', '');
+        const title = raw.replace(/[-_]/g, ' ')
+                        .replace(/\b\w/g, c => c.toUpperCase());
+
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = BASE_URL + file.name;
+        card.target    = '_blank';
+        card.rel       = 'noopener';
+
+        card.innerHTML = `
+          <div class="blog-card-tag">Article</div>
+          <h3>${title}</h3>
+          <div class="blog-card-footer">
+            <span class="blog-card-meta">${file.name}</span>
+            <span class="blog-card-arrow">→</span>
+          </div>`;
+
+        gridEl.appendChild(card);
+      });
+
+    } catch (err) {
+      stateEl.outerHTML = `
+        <div class="error-block">
+          <strong>Không thể tải bài viết</strong>
+          ${err.message}<br><br>
+          Hãy kiểm tra lại <code>GITHUB_USER</code>, <code>GITHUB_REPO</code>
+          và đảm bảo repo là public.
+        </div>`;
+      countEl.textContent = 'Lỗi tải';
+    }
+  }
+
+  loadBlogs();
+
 
 <footer>
   <div id="footer-placeholder"></div>
@@ -879,12 +964,6 @@
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer-placeholder').innerHTML = data;
-    });
-
-  fetch('my-blogs.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('myblog-placeholder').innerHTML = data;
     });
 </script>
 </body>
