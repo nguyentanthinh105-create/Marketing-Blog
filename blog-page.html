@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="icon" type="image/png" href="./logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Fullstack Growth Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f8f5;
+      --surface: #ffffff;
+      --green-50:  #f4faf4;
+      --green-100: #eef5ee;
+      --green-200: #d4ebcf;
+      --green-300: #a8d5a0;
+      --green-500: #3a8c3f;
+      --green-600: #2d7032;
+      --green-700: #1f5224;
+      --text-primary:   #1a1f1a;
+      --text-secondary: #4a5549;
+      --text-muted:     #7a8a79;
+      --border:         #d8e4d6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-badge {
+      background: var(--green-500);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .nav-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* ── BANNER ── */
+    .banner-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .banner-wrap a img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-100);
+      color: var(--green-600);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+      padding-bottom: 15px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 600px;
+      padding-bottom: 3px;
+    }
+
+    /* topic pills */
+    .topic-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .topic-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .topic-pill .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green-500);
+      flex-shrink: 0;
+    }
+    .topic-pill .dot.blue  { background: #3b82f6; }
+    .topic-pill .dot.orange { background: #f97316; }
+
+    /* ── SECTION WRAPPER ── */
+    .section-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+    .section-header {
+      margin-bottom: 28px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      color: var(--text-primary);
+      padding-bottom: 5px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      padding-bottom: 3px;
+    }
+
+    /* ── BLOG GRID ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover {
+      border-color: var(--green-300);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(58,140,63,.08);
+    }
+    .blog-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 10px;
+    }
+    .blog-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text-primary);
+      padding-bottom: 3px;
+      flex: 1;
+    }
+    .blog-card-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .blog-card-arrow { font-size: 13px; font-weight: 700; color: var(--green-500); }
+
+    /* ── TABS ── */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--green-100);
+      padding-bottom: 0;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      border-radius: 6px 6px 0 0;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--green-500); background: var(--green-100); }
+    .tab-btn.active {
+      color: var(--green-500);
+      border-bottom-color: var(--green-500);
+      background: var(--green-100);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeUp .3s ease both; }
+
+    /* ── STATE BLOCK ── */
+    .state-block {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 32px 28px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 2px solid var(--green-200);
+      border-top-color: var(--green-500);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 12px;
+    }
+    .state-title { font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 32px;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 36px; display: flex; align-items: center;
+      justify-content: space-between; background: var(--surface);
+      gap: 24px; margin-bottom: 32px;
+    }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 140px; width: auto; display: block; }
+    .footer-logo-placeholder {
+      height: 140px; width: 140px; background: var(--text-primary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name  { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp .55s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="nav-badge">Entity Studio</span>
+      <span class="nav-label">Fullstack Growth Marketing</span>
+    </div>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div class="banner-wrap">
+  <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/" target="_blank">
+    <img src="banner@2x.png" style="width:100%;height:auto;display:block;">
+  </a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Blog · Kiến thức thực chiến</div>
+  <h1>Marketing không lý thuyết —<br>chỉ có thực chiến</h1>
+  <p class="hero-sub">Tổng hợp các bài viết chuyên sâu về Growth Marketing, AI Marketing và Branding — được viết từ kinh nghiệm thực tế, không phải sao chép sách vở.</p>
+  <div class="topic-pills">
+    <div class="topic-pill"><span class="dot"></span>Growth Marketing</div>
+    <div class="topic-pill"><span class="dot blue"></span>AI Marketing</div>
+    <div class="topic-pill"><span class="dot orange"></span>Branding</div>
+  </div>
+</div>
+
+<!-- BÀI VIẾT MỚI NHẤT -->
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Mới nhất</div>
+    <h2>Các bài viết mới nhất</h2>
+    <p class="section-desc">Những nội dung được đăng gần đây nhất từ tất cả chủ đề.</p>
+  </div>
+  <div id="latest-state" class="state-block">
+    <div class="spinner"></div>
+    <div class="state-title">Đang tải bài viết...</div>
+  </div>
+  <div id="latest-grid" class="blog-grid" style="display:none;"></div>
+</div>
+
+<hr class="divider">
+
+<!-- BÀI VIẾT THEO CHỦ ĐỀ -->
+<div class="section-wrap" style="padding-top: 56px;">
+  <div class="section-header">
+    <div class="section-label">Theo chủ đề</div>
+    <h2>Các bài viết theo chủ đề</h2>
+    <p class="section-desc">Chọn chủ đề bạn muốn tìm hiểu sâu hơn.</p>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTopicTab('growth', this)">📈 Growth Marketing</button>
+    <button class="tab-btn" onclick="switchTopicTab('ai', this)">🤖 AI Marketing</button>
+    <button class="tab-btn" onclick="switchTopicTab('branding', this)">🎨 Branding</button>
+  </div>
+
+  <div id="tab-growth" class="tab-panel active">
+    <div id="growth-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="growth-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+
+  <div id="tab-ai" class="tab-panel">
+    <div id="ai-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="ai-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+
+  <div id="tab-branding" class="tab-panel">
+    <div id="branding-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="branding-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · Fun fact: 70% trang web này được tạo bởi AI</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const GITHUB_USER = 'nguyentanthinh105-create';
+  const GITHUB_REPO = 'Marketing-Blog';
+  const BASE        = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}`;
+  const API_BASE    = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents`;
+
+  const FOLDERS = {
+    latest:   'new-article',
+    growth:   'growth-marketing',
+    ai:       'ai-marketing',
+    branding: 'branding'
+  };
+
+  /* ── helpers ── */
+  async function fetchArticles(folder) {
+    const res = await fetch(`${API_BASE}/${folder}`);
+    if (!res.ok) throw new Error(`API error ${res.status}`);
+    const files = await res.json();
+    return files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+  }
+
+  async function buildCard(file, folder) {
+    try {
+      const html = await (await fetch(`${BASE}/${folder}/${file.name}`)).text();
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+      const category    = doc.querySelector('meta[name="category"]')?.content || 'Article';
+      const description = doc.querySelector('meta[name="description"]')?.content || '';
+      const title       = doc.title || file.name.replace('.html','').replace(/[-_]/g,' ');
+      const card = document.createElement('a');
+      card.className = 'blog-card';
+      card.href   = `${BASE}/${folder}/${file.name}`;
+      card.target = '_blank';
+      card.rel    = 'noopener';
+      card.innerHTML = `
+        <div class="blog-card-tag">${category}</div>
+        <h3>${title}</h3>
+        ${description ? `<p class="blog-card-meta">${description}</p>` : ''}
+        <div class="blog-card-footer">
+          <span class="blog-card-arrow">Đọc thêm →</span>
+        </div>`;
+      return card;
+    } catch { return null; }
+  }
+
+  async function loadSection(key) {
+    const folder   = FOLDERS[key];
+    const stateEl  = document.getElementById(`${key}-state`);
+    const gridEl   = document.getElementById(`${key}-grid`);
+    try {
+      const articles = await fetchArticles(folder);
+      if (!articles.length) {
+        stateEl.innerHTML = `<div class="state-title">Chưa có bài viết trong chủ đề này.</div>`;
+        return;
+      }
+      const cards = await Promise.all(articles.map(f => buildCard(f, folder)));
+      stateEl.style.display = 'none';
+      gridEl.style.display  = 'grid';
+      cards.forEach(c => { if (c) gridEl.appendChild(c); });
+    } catch (err) {
+      stateEl.innerHTML = `<div class="state-title" style="color:#c0392b;">Không thể tải bài viết.</div><div style="font-size:13px;">${err.message}</div>`;
+    }
+  }
+
+  /* ── tab switcher with lazy load ── */
+  const loaded = { latest: false, growth: false, ai: false, branding: false };
+
+  function switchTopicTab(key, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + key).classList.add('active');
+    btn.classList.add('active');
+    if (!loaded[key]) { loaded[key] = true; loadSection(key); }
+  }
+
+  /* ── initial load ── */
+  loadSection('latest');
+  loadSection('growth'); // preload first tab
+  loaded.growth = true;
+</script>
+</body>
+</html>
