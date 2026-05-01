@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
- <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="shortcut icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="category" content="Growth Marketing"> <!-- Chủ đề bài viết -->
@@ -756,7 +758,35 @@
 
 <!-- FOOTER -->
 <footer>
-  <div id="footer-placeholder"></div>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · All rights reserved</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -767,11 +797,6 @@ function switchTab(id, btn) {
   document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
 }
-
-// ── FETCH FOOTER ──
-fetch('footer.html')
-  .then(r => r.text())
-  .then(data => { document.getElementById('footer-placeholder').innerHTML = data; });
 
 // ── INJECT BLOG SECTION LAYOUT ──
 document.getElementById('myblog-placeholder').innerHTML = `
