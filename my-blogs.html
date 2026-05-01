@@ -36,37 +36,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-left { display: flex; align-items: center; gap: 10px; }
-    .nav-badge {
-      background: var(--green-500);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-      text-decoration: none;
-    }
-    .nav-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
-
+  
     /* ── HERO ── */
     .hero {
       max-width: 760px;
@@ -223,25 +193,11 @@
 </head>
 <body>
 
-<!-- NAV -->
-<header>
-  <div class="nav-inner">
-    <div class="nav-left">
-      <span class="nav-badge">Entity Studio</span>
-      <span class="nav-label">Fullstack Growth Marketing</span>
-    </div>
-  </div>
-</header>
-
 <!-- HERO -->
 <div class="hero">
   <div class="hero-tag">All Articles</div>
   <h1>My Blogs</h1>
   <p class="hero-sub">Tổng hợp các bài viết về Growth Marketing, Product Strategy và Data — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
-  <div class="hero-meta">
-    <span class="hero-meta-item"><strong>Nguyễn Tấn Thịnh</strong></span>
-    <span class="dot">·</span>
-    <span class="hero-meta-item">PMF · Data · PLG · Strategy</span>
     <span class="dot">·</span>
     <span class="hero-meta-item" id="post-count">Đang tải...</span>
   </div>
