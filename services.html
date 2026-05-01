@@ -976,7 +976,12 @@
 </div>
 
 <footer>
-  <p>entity studio · Fullstack Growth Marketing · PMF → Strategy → Execution</p>
+  <div id="footer-placeholder"></div>
+fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('footer-placeholder').innerHTML = data;
+  });
 </footer>
 
 <script>
