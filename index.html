@@ -547,7 +547,15 @@
   padding-top: 14px;
   border-top: 1px solid var(--border);
 }
-.blog-card-meta { font-size: 12px; color: var(--text-muted); }
+.blog-card-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn mô tả trong 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .blog-card-arrow { font-size: 16px; color: #3a8c3f; font-weight: 700; }
 
 .state-block {
@@ -942,19 +950,18 @@ function switchTab(id, btn) {
   btn.classList.add('active');
 }
 
-// 1. GIỮ NGUYÊN FETCH FOOTER
+// 1. GIỮ NGUYÊN FETCH FOOTER[cite: 1]
 fetch('footer.html')
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-placeholder').innerHTML = data;
   });
 
-// 2. GỘP TRỰC TIẾP CODE CỦA MY-BLOGS VÀO ĐÂY
+// 2. CẬP NHẬT LAYOUT BLOG (Xóa post-count)
 const myBlogHTML = `
   <div class="hero" style="padding: 40px 32px 24px; max-width: 860px;">
     <h2 style="font-size: 32px; margin-bottom: 8px;">Các bài blog của tôi</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 16px;">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
-    <div id="post-count" style="font-size: 13px; color: var(--text-muted);">Đang tải...</div>
+    <p style="color: var(--text-secondary); margin-bottom: 16px;">Kinh nghiệm thực chiến về Growth Marketing và AI.</p>
   </div>
   <div class="content" style="max-width: 860px; margin: 0 auto; padding: 0 32px 60px;">
     <div id="blog-state" class="state-block">
@@ -964,10 +971,9 @@ const myBlogHTML = `
     <div id="blog-grid" class="blog-grid" style="display:none;"></div>
   </div>
 `;
-
-// Chèn khung HTML vào placeholder
 document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
-// Logic gọi API của GitHub (từ my-blogs.html)
+
+// 3. LOGIC LẤY DỮ LIỆU TỪ META TAGS
 const GITHUB_USER    = 'nguyentanthinh105-create';
 const GITHUB_REPO    = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
@@ -977,7 +983,6 @@ const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REP
 async function loadBlogs() {
   const stateEl = document.getElementById('blog-state');
   const gridEl  = document.getElementById('blog-grid');
-  const countEl = document.getElementById('post-count');
 
   try {
     const res = await fetch(API_URL);
@@ -987,37 +992,47 @@ async function loadBlogs() {
     const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
     if (articles.length === 0) {
-      stateEl.innerHTML = `<div class="state-title">Chưa có bài viết nào</div>`;
+      stateEl.innerHTML = `<div>Chưa có bài viết nào.</div>`;
       return;
     }
 
-    countEl.textContent = `${articles.length} bài viết`;
     stateEl.style.display = 'none';
     gridEl.style.display  = 'grid';
 
-    articles.forEach(file => {
-      const raw   = file.name.replace('.html', '');
-      const title = raw.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    // Duyệt qua từng bài viết để lấy nội dung meta[cite: 2]
+    for (const file of articles) {
+      try {
+        const response = await fetch(BASE_URL + file.name);
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
 
-      const card = document.createElement('a');
-      card.className = 'blog-card';
-      card.href      = BASE_URL + file.name;
-      card.target    = '_blank';
-      card.innerHTML = `
-        <div class="blog-card-tag">Article</div>
-        <h3>${title}</h3>
-        <div class="blog-card-footer">
-          <span class="blog-card-meta">${file.name}</span>
-          <span class="blog-card-arrow">→</span>
-        </div>`;
-      gridEl.appendChild(card);
-    });
+        // Lấy thông tin từ thẻ meta[cite: 2]
+        const category = doc.querySelector('meta[name="category"]')?.content || "Blog";
+        const description = doc.querySelector('meta[name="description"]')?.content || "Nhấn để xem chi tiết bài viết này.";
+        const title = doc.title || file.name.replace('.html', '').replace(/[-_]/g, ' ');
+
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = BASE_URL + file.name;
+        card.target    = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">${description}</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-arrow">Đọc bài viết →</span>
+          </div>`;
+        gridEl.appendChild(card);
+      } catch (e) {
+        console.error("Lỗi khi đọc file:", file.name);
+      }
+    }
   } catch (err) {
-    stateEl.innerHTML = `<div style="color:red;">Không thể tải bài viết</div>`;
+    stateEl.innerHTML = `<div style="color:red;">Không thể tải bài viết.</div>`;
   }
 }
 
-// Chạy hàm load blog
 loadBlogs();
 </script>
 </body>
