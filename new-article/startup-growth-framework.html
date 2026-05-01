@@ -400,12 +400,69 @@
 
     /* ── FOOTER ── */
     footer {
+      background: var(--surface);
       border-top: 1px solid var(--border);
-      padding: 32px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
+      padding: 40px 0 32px;
     }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 36px; display: flex; align-items: center;
+      justify-content: space-between; background: var(--surface);
+      gap: 24px; margin-bottom: 32px;
+    }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 140px; width: auto; display: block; }
+    .footer-logo-placeholder {
+      height: 140px; width: 140px; background: var(--text-primary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name  { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
+
+    /* ── BLOG SECTION ── */
+    .blogs-section-wrap { max-width: 760px; margin: 0 auto; padding: 56px 32px 64px; border-top: 1px solid var(--border); }
+    .blogs-section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; gap: 16px; }
+    .blogs-section-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green-500); margin-bottom: 6px; }
+    .blogs-section-title { font-size: 24px; font-weight: 800; letter-spacing: -.015em; color: var(--text-primary); line-height: 1.2; }
+    .blogs-section-desc { font-size: 15px; color: var(--text-secondary); margin-top: 6px; }
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .blog-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px 26px; text-decoration: none; display: flex; flex-direction: column;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover { border-color: var(--green-300); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58,140,63,.08); }
+    .blog-card-tag { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--green-500); margin-bottom: 10px; }
+    .blog-card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; color: var(--text-primary); padding-bottom: 3px; flex: 1; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: flex-end; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .blog-card-arrow { font-size: 13px; font-weight: 600; color: var(--green-500); }
+    .state-block {
+      background: var(--green-100); border: 1px solid var(--green-200); border-radius: 10px;
+      padding: 32px 28px; text-align: center; color: var(--text-muted); font-size: 14px;
+    }
+    .state-block .spinner {
+      width: 24px; height: 24px; border: 2px solid var(--green-200);
+      border-top-color: var(--green-500); border-radius: 50%;
+      animation: spin .7s linear infinite; margin: 0 auto 12px;
+    }
+    .state-block .state-title { font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── FADE-IN ANIMATION ── */
     @keyframes fadeUp {
@@ -427,7 +484,7 @@
   </div>
 </header>
 <div style="max-width: 760px; margin: 0 auto; padding: 0 32px;">
-    <a href="services.html" target="_blank">
+    <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/" target="_blank">
       <img src="banner@2x.png" style="width: 100%; height: auto; display: block;">
     </a>
 </div>
@@ -694,10 +751,16 @@
 
 </div>
 
+<!-- BLOG SECTION -->
+<div id="myblog-placeholder"></div>
+
+<!-- FOOTER -->
 <footer>
-  <p>Fullstack Growth Marketing · Framework PMF → Data → PLG</p>
+  <div id="footer-placeholder"></div>
 </footer>
+
 <script>
+// ── TAB SWITCHER ──
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -705,20 +768,21 @@ function switchTab(id, btn) {
   btn.classList.add('active');
 }
 
-// 1. GIỮ NGUYÊN FETCH FOOTER
+// ── FETCH FOOTER ──
 fetch('footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  });
+  .then(r => r.text())
+  .then(data => { document.getElementById('footer-placeholder').innerHTML = data; });
 
-// 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
-const myBlogHTML = `
-  <div class="hero" style="padding: 40px 32px 24px; max-width: 860px;">
-    <h2 style="font-size: 32px; margin-bottom: 8px;">Các bài blog của tôi</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 16px;">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
-  </div>
-  <div class="content" style="max-width: 860px; margin: 0 auto; padding: 0 32px 60px;">
+// ── INJECT BLOG SECTION LAYOUT ──
+document.getElementById('myblog-placeholder').innerHTML = `
+  <div class="blogs-section-wrap">
+    <div class="blogs-section-header">
+      <div>
+        <div class="blogs-section-label">From the blog</div>
+        <div class="blogs-section-title">Các bài viết của tôi</div>
+        <div class="blogs-section-desc">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — từ trải nghiệm thực chiến.</div>
+      </div>
+    </div>
     <div id="blog-state" class="state-block">
       <div class="spinner"></div>
       <div class="state-title">Đang tải bài viết...</div>
@@ -726,14 +790,13 @@ const myBlogHTML = `
     <div id="blog-grid" class="blog-grid" style="display:none;"></div>
   </div>
 `;
-document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
 
-// 3. LOGIC LẤY META TRỰC TIẾP TỪ NỘI DUNG FILE
-const GITHUB_USER    = 'nguyentanthinh105-create';
-const GITHUB_REPO    = 'Marketing-Blog';
+// ── FETCH BLOGS FROM GITHUB ──
+const GITHUB_USER     = 'nguyentanthinh105-create';
+const GITHUB_REPO     = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
-const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
-const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+const BASE_URL        = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
 
 async function loadBlogs() {
   const stateEl = document.getElementById('blog-state');
@@ -741,59 +804,47 @@ async function loadBlogs() {
 
   try {
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error(`GitHub API error`);
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
 
-    const files = await res.json();
+    const files    = await res.json();
     const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
     if (articles.length === 0) {
-      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
+      stateEl.innerHTML = `<div class="state-title">Chưa có bài viết nào</div><div>Thêm file .html vào thư mục ${ARTICLES_FOLDER} trên GitHub.</div>`;
       return;
     }
 
     stateEl.style.display = 'none';
     gridEl.style.display  = 'grid';
 
-    // Xử lý song song để tăng tốc độ tải trang
-    const blogPromises = articles.map(async (file) => {
+    const cards = await Promise.all(articles.map(async (file) => {
       try {
-        const response = await fetch(BASE_URL + file.name);
-        const htmlText = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
-
-        // TRUY XUẤT META CHÍNH XÁC TỪ FILE
-        const category = doc.querySelector('meta[name="category"]')?.getAttribute('content') || "Chưa phân loại";
-        const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || "Không có mô tả cho bài viết này.";
-        const title = doc.title || file.name.replace('.html', '');
+        const html = await (await fetch(BASE_URL + file.name)).text();
+        const doc  = new DOMParser().parseFromString(html, 'text/html');
+        const category    = doc.querySelector('meta[name="category"]')?.content || 'Article';
+        const description = doc.querySelector('meta[name="description"]')?.content || '';
+        const title       = doc.title || file.name.replace('.html', '').replace(/[-_]/g, ' ');
 
         const card = document.createElement('a');
         card.className = 'blog-card';
         card.href      = BASE_URL + file.name;
         card.target    = '_blank';
+        card.rel       = 'noopener';
         card.innerHTML = `
           <div class="blog-card-tag">${category}</div>
           <h3>${title}</h3>
-          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">
-            ${description}
-          </p>
+          ${description ? `<p style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.5;flex:1;">${description}</p>` : ''}
           <div class="blog-card-footer">
             <span class="blog-card-arrow">Đọc thêm →</span>
           </div>`;
         return card;
-      } catch (e) {
-        console.error("Lỗi đọc meta của file:", file.name);
-        return null;
-      }
-    });
+      } catch (e) { return null; }
+    }));
 
-    const cards = await Promise.all(blogPromises);
-    cards.forEach(card => {
-      if (card) gridEl.appendChild(card);
-    });
+    cards.forEach(card => { if (card) gridEl.appendChild(card); });
 
   } catch (err) {
-    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
+    stateEl.innerHTML = `<div class="state-title" style="color:#c0392b;">Không thể tải bài viết</div><div>${err.message}</div>`;
   }
 }
 
