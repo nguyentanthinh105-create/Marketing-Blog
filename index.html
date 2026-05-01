@@ -942,7 +942,6 @@
 </footer>
 
 <script>
- // Logic chuyển Tab hiện có
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -950,14 +949,14 @@ function switchTab(id, btn) {
   btn.classList.add('active');
 }
 
-// 1. GIỮ NGUYÊN FETCH FOOTER[cite: 1]
+// 1. GIỮ NGUYÊN FETCH FOOTER
 fetch('footer.html')
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-placeholder').innerHTML = data;
   });
 
-// 2. CẬP NHẬT LAYOUT BLOG (Xóa post-count)
+// 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
 const myBlogHTML = `
   <div class="hero" style="padding: 40px 32px 24px; max-width: 860px;">
     <h2 style="font-size: 32px; margin-bottom: 8px;">Các bài blog của tôi</h2>
@@ -973,7 +972,7 @@ const myBlogHTML = `
 `;
 document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
 
-// 3. LOGIC LẤY DỮ LIỆU TỪ META TAGS
+// 3. LOGIC LẤY META TRỰC TIẾP TỪ NỘI DUNG FILE
 const GITHUB_USER    = 'nguyentanthinh105-create';
 const GITHUB_REPO    = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
@@ -986,31 +985,31 @@ async function loadBlogs() {
 
   try {
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error(`Lỗi kết nối GitHub`);
+    if (!res.ok) throw new Error(`GitHub API error`);
 
     const files = await res.json();
     const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
     if (articles.length === 0) {
-      stateEl.innerHTML = `<div>Chưa có bài viết nào.</div>`;
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
       return;
     }
 
     stateEl.style.display = 'none';
     gridEl.style.display  = 'grid';
 
-    // Duyệt qua từng bài viết để lấy nội dung meta[cite: 2]
-    for (const file of articles) {
+    // Xử lý song song để tăng tốc độ tải trang
+    const blogPromises = articles.map(async (file) => {
       try {
         const response = await fetch(BASE_URL + file.name);
         const htmlText = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, 'text/html');
 
-        // Lấy thông tin từ thẻ meta[cite: 2]
-        const category = doc.querySelector('meta[name="category"]')?.content || "Blog";
-        const description = doc.querySelector('meta[name="description"]')?.content || "Nhấn để xem chi tiết bài viết này.";
-        const title = doc.title || file.name.replace('.html', '').replace(/[-_]/g, ' ');
+        // TRUY XUẤT META CHÍNH XÁC TỪ FILE
+        const category = doc.querySelector('meta[name="category"]')?.getAttribute('content') || "Chưa phân loại";
+        const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || "Không có mô tả cho bài viết này.";
+        const title = doc.title || file.name.replace('.html', '');
 
         const card = document.createElement('a');
         card.className = 'blog-card';
@@ -1019,17 +1018,26 @@ async function loadBlogs() {
         card.innerHTML = `
           <div class="blog-card-tag">${category}</div>
           <h3>${title}</h3>
-          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">${description}</p>
+          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">
+            ${description}
+          </p>
           <div class="blog-card-footer">
-            <span class="blog-card-arrow">Đọc bài viết →</span>
+            <span class="blog-card-arrow">Đọc thêm →</span>
           </div>`;
-        gridEl.appendChild(card);
+        return card;
       } catch (e) {
-        console.error("Lỗi khi đọc file:", file.name);
+        console.error("Lỗi đọc meta của file:", file.name);
+        return null;
       }
-    }
+    });
+
+    const cards = await Promise.all(blogPromises);
+    cards.forEach(card => {
+      if (card) gridEl.appendChild(card);
+    });
+
   } catch (err) {
-    stateEl.innerHTML = `<div style="color:red;">Không thể tải bài viết.</div>`;
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
   }
 }
 
