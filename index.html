@@ -90,13 +90,9 @@
     .hero {
       max-width: 860px;
       margin: 0 auto;
-      padding: 72px 32px 56px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
+      padding: 80px 32px 56px;
+      text-align: center;
     }
-    .hero-left {}
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -109,7 +105,7 @@
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     .hero-tag::before {
       content:'';
@@ -134,52 +130,53 @@
       font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.75;
+      max-width: 480px;
+      margin: 0 auto 40px;
     }
-    .hero-right {
-      background: var(--pink-50);
-      border: 1px solid var(--pink-200);
-      border-radius: 14px;
-      padding: 28px 26px;
+
+    /* who-we-serve card */
+    .hero-serve {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      background: var(--surface);
     }
-    .hero-right .label {
+    .hero-serve-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--pink-500);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      text-align: left;
     }
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .hero-serve-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
     }
-    .stat-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--pink-200);
+    .serve-col {
+      padding: 0 20px;
+      border-right: 1px solid var(--border);
+      text-align: left;
     }
-    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .stat-icon {
-      width: 32px; height: 32px;
-      background: var(--pink-100);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
+    .serve-col:first-child { padding-left: 0; }
+    .serve-col:last-child  { border-right: none; padding-right: 0; }
+    .serve-icon {
+      font-size: 20px;
+      margin-bottom: 10px;
     }
-    .stat-text strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-    .stat-text span {
+    .serve-title {
       font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .serve-desc {
+      font-size: 12px;
       color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* ── SERVICES SECTION ── */
@@ -546,16 +543,16 @@
   transition: border-color .2s, transform .2s, box-shadow .2s;
 }
 .blog-card:hover {
-  border-color: #a8d5a0; /* green-300 */
+  border-color: #ffc9b5;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(58,140,63,.08);
+  box-shadow: 0 8px 24px rgba(240,90,40,.08);
 }
 .blog-card-tag {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
-  color: #3a8c3f; /* green-500 */
+  color: #f05a28;
   margin-bottom: 10px;
 }
 .blog-card h3 {
@@ -583,11 +580,11 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.blog-card-arrow { font-size: 16px; color: #3a8c3f; font-weight: 700; }
+.blog-card-arrow { font-size: 16px; color: #f05a28; font-weight: 700; }
 
 .state-block {
-  background: #eef5ee; /* green-100 */
-  border: 1px solid #d4ebcf; /* green-200 */
+  background: #fff5f2;
+  border: 1px solid #ffc9b5;
   border-radius: 10px;
   padding: 32px 28px;
   text-align: center;
@@ -595,8 +592,8 @@
 }
 .spinner {
   width: 24px; height: 24px;
-  border: 2px solid #d4ebcf;
-  border-top-color: #3a8c3f;
+  border: 2px solid #ffc9b5;
+  border-top-color: #f05a28;
   border-radius: 50%;
   animation: spin .7s linear infinite;
   margin: 0 auto 12px;
@@ -617,41 +614,33 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-left">
-    <h1>Tăng trưởng <em>đúng nền</em>,<br>không đốt ngân sách</h1>
-    <p class="hero-sub">Từ chiến lược đến triển khai — chúng tôi đồng hành toàn bộ hành trình tăng trưởng của thương hiệu bạn.</p>
-  </div>
-  <div class="hero-right">
-    <div class="label">Chúng tôi phục vụ ai?</div>
-    <div class="hero-stat">
-      <div class="stat-row">
-        <div class="stat-icon">🏢</div>
-        <div class="stat-text">
-          <strong>Doanh nghiệp SME</strong>
-          <span>Muốn làm marketing bài bản, không phụ thuộc may rủi</span>
-        </div>
+  <div class="hero-tag">Fullstack Growth Marketing</div>
+  <h1>Tăng trưởng <em>đúng nền</em>,<br>không đốt ngân sách</h1>
+  <p class="hero-sub">Từ chiến lược đến triển khai — chúng tôi đồng hành toàn bộ hành trình tăng trưởng của thương hiệu bạn.</p>
+
+  <div class="hero-serve">
+    <div class="hero-serve-label">Chúng tôi phục vụ ai?</div>
+    <div class="hero-serve-grid">
+      <div class="serve-col">
+        <div class="serve-icon">🏢</div>
+        <div class="serve-title">Doanh nghiệp SME</div>
+        <div class="serve-desc">Muốn làm marketing bài bản, không phụ thuộc may rủi</div>
       </div>
-      <div class="stat-row">
-        <div class="stat-icon">🚀</div>
-        <div class="stat-text">
-          <strong>Startup 0 → 1 → 10</strong>
-          <span>Cần build hệ thống từ đầu, ra tiền nhanh, scale đúng cách</span>
-        </div>
+      <div class="serve-col">
+        <div class="serve-icon">🚀</div>
+        <div class="serve-title">Startup 0 → 1 → 10</div>
+        <div class="serve-desc">Cần build hệ thống từ đầu, ra tiền nhanh, scale đúng cách</div>
       </div>
-      <div class="stat-row">
-        <div class="stat-icon">👤</div>
-        <div class="stat-text">
-          <strong>Founder không có thời gian</strong>
-          <span>Muốn thuê ngoài marketing mà vẫn kiểm soát được chiến lược</span>
-        </div>
+      <div class="serve-col">
+        <div class="serve-icon">👤</div>
+        <div class="serve-title">Founder thiếu thời gian</div>
+        <div class="serve-desc">Muốn thuê ngoài marketing mà vẫn kiểm soát được chiến lược</div>
       </div>
-      <div class="stat-row">
-        <div class="stat-icon">📉</div>
-        <div class="stat-text">
-          <strong>Đang loay hoay, chưa ra đơn</strong>
-          <span>Chạy ads nhiều nhưng CPL cao, content nhiều nhưng không có khách</span>
-         </div>
-      </div>     
+      <div class="serve-col">
+        <div class="serve-icon">📉</div>
+        <div class="serve-title">Đang loay hoay, chưa ra đơn</div>
+        <div class="serve-desc">Chạy ads nhiều nhưng CPL cao, content nhiều nhưng không có khách</div>
+      </div>
     </div>
   </div>
 </div>
