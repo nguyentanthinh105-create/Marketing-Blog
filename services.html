@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dịch Vụ – Fullstack Growth Marketing</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -202,7 +202,7 @@
     h2 {
       font-family: 'Inter', sans-serif;
       font-size: var(--h2);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1.2;
       letter-spacing: -.01em;
       color: var(--text-primary);
@@ -227,7 +227,7 @@
     .tab-btn {
       background: none;
       border: none;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
@@ -355,7 +355,7 @@
       margin-bottom: 2px;
     }
 
-    /* output tag */
+    /* output tag — single definition, no duplicate */
     .output-tag {
       display: inline-block;
       background: var(--pink-100);
@@ -367,19 +367,6 @@
       letter-spacing: .04em;
       margin-top: 4px;
     }
-/* output tag1 */
-    .output-tag {
-      display: inline-block;
-      background: var(--pink-100);
-      color: var(--pink-700);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-      letter-spacing: .04em;
-      margin-top: 4px;
-    }
-
 
     /* 3-col card row */
     .card-row-3 {
@@ -408,6 +395,15 @@
       max-width: 860px;
       margin: 0 auto;
       padding: 0 32px 80px;
+    }
+    .bottom-section-header {
+      margin-bottom: 32px;
+    }
+    .bottom-section-header .section-label {
+      margin-bottom: 8px;
+    }
+    .bottom-section-header h2 {
+      padding-bottom: 5px;
     }
     .bottom-grid {
       display: grid;
@@ -498,22 +494,12 @@
 
     /* ── FOOTER ── */
     footer {
+      background: var(--surface);
       border-top: 1px solid var(--border);
-      padding: 28px 32px;
+      padding: 32px;
       text-align: center;
       font-size: 13px;
       color: var(--text-muted);
-    }
-
-    /* ── ANIMATION ── */
-    .hero { animation: fadeUp .6s ease both; }
-    .services-wrap { animation: fadeUp .5s .1s ease both; }
-
-    @media (max-width: 640px) {
-      .hero { grid-template-columns: 1fr; }
-      .block-grid-2, .card-row-3, .bottom-grid { grid-template-columns: 1fr; }
-      .tabs-nav { gap: 4px; }
-      .tab-btn { font-size: 12px; padding: 8px 10px; }
     }
   </style>
 </head>
@@ -523,47 +509,42 @@
 <header>
   <div class="nav-inner">
     <div class="nav-brand">
-      <span class="nav-contact">Dịch vụ Fullstack Growth Marketing</span>
-     </div>
-    <div class="nav-badge">Liên hệ tư vấn</div>
+      <span class="nav-badge">Entity Studio</span>
+      <span class="nav-label">Fullstack Growth Marketing</span>
+    </div>
+    <span class="nav-contact">nguyentanthinh105@gmail.com</span>
   </div>
 </header>
 
-<!-- HERO INTRO -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <h1>Marketing<br><em>thực chiến</em><br>từ A đến Z</h1>
-    <p class="hero-sub">Chúng tôi không bán gói dịch vụ — chúng tôi giải quyết vấn đề tăng trưởng thực sự. Từ tư vấn chiến lược, xây hệ thống marketing, đến triển khai và vận hành toàn diện.</p>
+    <div class="hero-tag">Dịch Vụ</div>
+    <h1>Tăng trưởng <em>đúng nền</em>,<br>không đốt ngân sách</h1>
+    <p class="hero-sub">Từ chiến lược đến triển khai — chúng tôi đồng hành toàn bộ hành trình tăng trưởng của thương hiệu bạn.</p>
   </div>
   <div class="hero-right">
-    <div class="label">Chúng tôi phục vụ ai?</div>
+    <div class="label">Tại sao chọn chúng tôi?</div>
     <div class="hero-stat">
       <div class="stat-row">
-        <div class="stat-icon">🏢</div>
+        <div class="stat-icon">🎯</div>
         <div class="stat-text">
-          <strong>Doanh nghiệp SME</strong>
-          <span>Muốn làm marketing bài bản, không phụ thuộc may rủi</span>
+          <strong>PMF trước, Ads sau</strong>
+          <span>Xây đúng nền trước khi scale — không lãng phí ngân sách</span>
         </div>
       </div>
       <div class="stat-row">
-        <div class="stat-icon">🚀</div>
+        <div class="stat-icon">📊</div>
         <div class="stat-text">
-          <strong>Startup 0 → 1 → 10</strong>
-          <span>Cần build hệ thống từ đầu, ra tiền nhanh, scale đúng cách</span>
+          <strong>Data-driven hoàn toàn</strong>
+          <span>Mọi quyết định đều có số liệu thực tế hỗ trợ</span>
         </div>
       </div>
       <div class="stat-row">
-        <div class="stat-icon">👤</div>
+        <div class="stat-icon">⚡</div>
         <div class="stat-text">
-          <strong>Founder không có thời gian</strong>
-          <span>Muốn thuê ngoài marketing mà vẫn kiểm soát được chiến lược</span>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-icon">📉</div>
-        <div class="stat-text">
-          <strong>Đang loay hoay, chưa ra đơn</strong>
-          <span>Chạy ads nhiều nhưng CPL cao, content nhiều nhưng không có khách</span>
+          <strong>Fullstack execution</strong>
+          <span>Chiến lược + nội dung + ads + đo lường — trong một gói</span>
         </div>
       </div>
     </div>
@@ -573,147 +554,76 @@
 <!-- SERVICES -->
 <div class="services-wrap">
   <div class="section-header">
-    <div class="hero-tag">Bảng Dịch Vụ</div>
-    <h1>Chọn dịch vụ phù hợp với bạn</h2>
-    <p class="section-desc">Mỗi dịch vụ được thiết kế theo từng giai đoạn tăng trưởng — từ khảo sát, xây nền đến triển khai và vận hành toàn hệ thống.</p>
+    <div class="section-label">Danh mục dịch vụ</div>
+    <h2>Chúng tôi làm được gì?</h2>
+    <p class="section-desc">Chọn dịch vụ phù hợp với giai đoạn tăng trưởng của bạn.</p>
   </div>
 
-  <!-- TAB NAV -->
+  <!-- TABS -->
   <div class="tabs-nav">
-    <button class="tab-btn" onclick="switchTab('brand-audit', this)">Brand Audit</button>
-    <button class="tab-btn" onclick="switchTab('brand-strategy', this)">Brand Strategy</button>
-    <button class="tab-btn" onclick="switchTab('quan-ly', this)">Quản Lý Marketing</button>
+    <button class="tab-btn active" onclick="switchTab('chien-luoc', this)">Chiến lược</button>
+    <button class="tab-btn" onclick="switchTab('quan-ly', this)">Quản lý Marketing</button>
     <button class="tab-btn" onclick="switchTab('execution', this)">Marketing Execution</button>
     <button class="tab-btn" onclick="switchTab('brand-identity', this)">Brand Identity</button>
   </div>
 
- 
-  <!-- TAB: BRAND AUDIT -->
-<div id="tab-brand-audit" class="tab-panel active">
+  <!-- TAB: CHIẾN LƯỢC -->
+  <div id="tab-chien-luoc" class="tab-panel active">
     <div class="block-accent">
-      <p>Khảo sát thương hiệu toàn diện để tìm ra đúng nguyên nhân "không ra tiền" — và xác định cơ hội bứt phá chưa được khai thác.</p>
+      <p>Không có chiến lược đúng, mọi chiến thuật đều là lãng phí. Chúng tôi xây hệ thống tư duy tăng trưởng trước khi triển khai bất kỳ kênh nào.</p>
     </div>
 
     <div class="block-grid-2">
       <div class="block-mini">
         <div class="bm-title">Phù hợp với ai?</div>
-        <p>• Doanh nghiệp đã hoạt động nhưng tăng trưởng chậm</p>
-        <p>• Content nhiều nhưng không ra khách</p>
-        <p>• Ads chạy nhưng chi phí cao</p>
+        <p>• Startup chưa tìm được Product-Market Fit</p>
+        <p>• SME muốn xây hệ thống Marketing bài bản</p>
+        <p>• Founder muốn hiểu bức tranh toàn cảnh trước khi đầu tư</p>
       </div>
       <div class="block-mini">
         <div class="bm-title">Chúng tôi giúp được gì?</div>
-        <p>• Làm rõ nguyên nhân "không ra tiền" (sai thị trường / sai offer / sai insight)</p>
-        <p>• Xác định lại Customer Insight thực tế</p>
-        <p>• Tìm "điểm nghẽn tăng trưởng" trong toàn hệ thống</p>
+        <p>• Xác định đúng tệp khách hàng và kênh tăng trưởng</p>
+        <p>• Xây hệ thống đo lường từ đầu (AARRR + NSM)</p>
+        <p>• Thiết lập roadmap Marketing rõ ràng theo từng giai đoạn</p>
       </div>
     </div>
 
     <div class="block">
       <div class="block-title">Hạng mục</div>
       <div class="item-list">
-        <div class="item-row">
-          <div class="item-icon">🏪</div>
-          <div class="item-body">
-            <strong>Xác định thị trường tiềm năng</strong>
-            Phân tích thị trường có khả năng ra tiền nhanh.
-	    <br> 			
-            <span class="output-tag">Bảng phân tích thị trường (1–2 trang)</span>
-          </div>
-        </div>
-        <div class="item-row">
-          <div class="item-icon">🎯</div>
-          <div class="item-body">
-            <strong>Phân tích đối thủ</strong>
-            Offer – giá – kênh – content của đối thủ trực tiếp và gián tiếp.
-          </div>
-        </div>
         <div class="item-row">
           <div class="item-icon">🔍</div>
           <div class="item-body">
-            <strong>Tìm khoảng trống chuyển đổi</strong>
-            Xác định chỗ đối thủ làm kém — là cơ hội khác biệt hóa của bạn.
-          </div>
-        </div>
-        <div class="item-row">
-          <div class="item-icon">👥</div>
-          <div class="item-body">
-            <strong>Phân tích khách hàng mục tiêu</strong>
-            Nỗi đau, hành vi, insight thực tế.
+            <strong>Nghiên cứu thị trường & đối thủ</strong>
+            Phân tích tệp khách hàng, đối thủ cạnh tranh và cơ hội thị trường để xác định hướng đi đúng.
             <br>
-		<span class="output-tag">Customer Avatar dùng để viết content & ads</span>
-          </div>
-        </div>
-        <div class="item-row">
-          <div class="item-icon">📋</div>
-          <div class="item-body">
-            <strong>Khảo sát hiện trạng Marketing</strong>
-            Đánh giá toàn bộ hệ thống marketing hiện tại của doanh nghiệp.
-           <br>
-		 <span class="output-tag">Bảng đánh giá hiện trạng (1–2 trang)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB: BRAND STRATEGY -->
-  <div id="tab-brand-strategy" class="tab-panel">
-    <div class="block-accent">
-      <p>Xây dựng hệ thống marketing bền vững — có chiến lược rõ ràng, thông điệp mạnh, phễu đúng — để vừa kéo số nhanh vừa xây thương hiệu lâu dài.</p>
-    </div>
-
-    <div class="block-grid-2">
-      <div class="block-mini">
-        <div class="bm-title">Phù hợp với ai?</div>
-        <p>• SME muốn làm bài bản, không phụ thuộc may rủi</p>
-        <p>• Đã có sản phẩm nhưng chưa có chiến lược</p>
-        <p>• Muốn build brand song song bán hàng</p>
-      </div>
-      <div class="block-mini">
-        <div class="bm-title">Chúng tôi giúp được gì?</div>
-        <p>• Xây định vị khác biệt (tránh "chuẩn hoá thương mại")</p>
-        <p>• Thiết kế thông điệp có khả năng chuyển đổi cao</p>
-        <p>• Xây hệ thống phễu Growth Marketing vừa xây thương hiệu vừa ra tiền</p>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">Hạng mục</div>
-      <div class="item-list">
-        <div class="item-row">
-          <div class="item-icon">💎</div>
-          <div class="item-body">
-            <strong>Định vị giá trị khác biệt</strong>
-            Xây dựng điểm nổi bật giúp thương hiệu tránh cạnh tranh thuần tuý về giá.
-            <br>
-		<span class="output-tag">Bảng phân tích giá trị thương hiệu (1–2 trang)</span>
-          </div>
-        </div>
-        <div class="item-row">
-          <div class="item-icon">🎁</div>
-          <div class="item-body">
-            <strong>Thiết kế Offer hấp dẫn</strong>
-            Kích thích mua hàng bằng cấu trúc offer thông minh.
-		<br>
-            <span class="output-tag">Hệ thống Menu sản phẩm, dịch vụ, ưu đãi</span>
+            <span class="output-tag">Báo cáo nghiên cứu thị trường</span>
           </div>
         </div>
         <div class="item-row">
           <div class="item-icon">🗺️</div>
           <div class="item-body">
-            <strong>Lập chiến lược Marketing</strong>
-            Chiến lược theo mô hình tạo giá trị bền vững.
-		<br>
-            <span class="output-tag">Bảng chiến lược theo mô hình</span>
+            <strong>Xây dựng chiến lược Marketing tổng thể</strong>
+            Lộ trình Marketing theo từng giai đoạn — từ nhận biết đến chuyển đổi và giữ chân.
+            <br>
+            <span class="output-tag">Bản chiến lược Marketing 3–6 tháng</span>
           </div>
         </div>
         <div class="item-row">
-          <div class="item-icon">📊</div>
+          <div class="item-icon">📐</div>
           <div class="item-body">
-            <strong>Xây dựng phễu Marketing</strong>
+            <strong>Thiết lập hệ thống đo lường</strong>
+            Xây dựng AARRR Funnel, North Star Metric và bộ KPI phù hợp với mục tiêu kinh doanh.
+            <br>
+            <span class="output-tag">Dashboard KPI + Hệ thống tracking</span>
+          </div>
+        </div>
+        <div class="item-row">
+          <div class="item-icon">🗂️</div>
+          <div class="item-body">
+            <strong>Sơ đồ phễu Marketing</strong>
             Theo hành trình khách hàng từ không biết đến mua hàng.
-		<br>
+            <br>
             <span class="output-tag">Sơ đồ phễu Marketing qua từng giai đoạn</span>
           </div>
         </div>
@@ -771,13 +681,13 @@
           <div class="item-body">
             <strong>Kế hoạch quảng cáo & ngân sách</strong>
             Bản kế hoạch chạy ads và phân bổ ngân sách theo KPI cụ thể.
-	   </div>
-	  </div>
-	  <div class="item-row">
+          </div>
+        </div>
+        <div class="item-row">
           <div class="item-icon">📉</div>
           <div class="item-body">
             <strong>Quản trị rủi ro</strong>
-            Đưa ra giải pháp ứng biến khi gặp rủi trong quá trình triển khai. 	
+            Đưa ra giải pháp ứng biến khi gặp rủi trong quá trình triển khai.
           </div>
         </div>
       </div>
@@ -804,7 +714,8 @@
         <p>• Tối ưu CPL, CPA theo performance thực tế</p>
       </div>
     </div>
- <div class="block">
+
+    <div class="block">
       <div class="block-title">Hạng mục</div>
       <div class="item-list">
         <div class="item-row">
@@ -812,8 +723,8 @@
           <div class="item-body">
             <strong>Triển khai Content</strong>
             Sản xuất nội dung theo kế hoạch đã đề ra — video, hình ảnh, caption.
-	    <br>
-	    <span class="output-tag">Post (video / hình ảnh + Caption)</span>
+            <br>
+            <span class="output-tag">Post (video / hình ảnh + Caption)</span>
           </div>
         </div>
         <div class="item-row">
@@ -821,7 +732,7 @@
           <div class="item-body">
             <strong>Chạy Quảng cáo</strong>
             Setup campaign, theo dõi và tối ưu liên tục theo số liệu thực tế.
-	    <br>
+            <br>
             <span class="output-tag">Creative Campaign + Tối ưu</span>
           </div>
         </div>
@@ -830,12 +741,14 @@
           <div class="item-body">
             <strong>Đo lường & Tối ưu</strong>
             Giảm thiểu rủi ro và gia tăng hiệu suất marketing qua từng chu kỳ.
-	    <br><span class="output-tag">Bản báo cáo Marketing thực tế</span>
-	 </div>
+            <br>
+            <span class="output-tag">Bản báo cáo Marketing thực tế</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
   <!-- TAB: BRAND IDENTITY -->
   <div id="tab-brand-identity" class="tab-panel">
     <div class="block-accent">
@@ -866,7 +779,7 @@
             <strong>Logo & Hệ thống nhận diện cơ bản</strong>
             Logo, màu sắc, phông chữ, ngôn ngữ thị giác dành riêng cho thương hiệu.
             <br>
-	     <span class="output-tag">Brand Guideline + Brand Identity File</span>
+            <span class="output-tag">Brand Guideline + Brand Identity File</span>
           </div>
         </div>
         <div class="item-row">
@@ -874,7 +787,7 @@
           <div class="item-body">
             <strong>Thiết kế nâng cao</strong>
             Phông chữ riêng, hình vẽ minh họa, yếu tố đồ họa độc quyền.
-	    <br>
+            <br>
             <span class="output-tag">File đóng gói + Hướng dẫn sử dụng</span>
           </div>
         </div>
@@ -883,7 +796,7 @@
           <div class="item-body">
             <strong>Thiết kế bao bì (Packaging)</strong>
             Hệ thống bao bì nổi bật trên kệ hàng.
-	    <br>
+            <br>
             <span class="output-tag">File in theo yêu cầu</span>
           </div>
         </div>
@@ -897,7 +810,7 @@
         <div class="item-row">
           <div class="item-icon">🤖</div>
           <div class="item-body">
-            <strong>Bộ Prompt AI tạo hình ảnh chuẩn thương hiệu<span class="output-tag">Mới</span></strong>
+            <strong>Bộ Prompt AI tạo hình ảnh chuẩn thương hiệu <span class="output-tag">Mới</span></strong>
             Tự động tạo hình ảnh, video đúng chuẩn thương hiệu.
           </div>
         </div>
@@ -906,7 +819,7 @@
           <div class="item-body">
             <strong>Thiết kế Website</strong>
             Giao diện website phục vụ chuyển đổi, đồng bộ thương hiệu.
-	    <br>
+            <br>
             <span class="output-tag">File Figma Website</span>
           </div>
         </div>
@@ -918,11 +831,11 @@
 
 <!-- NOTES & CONTACT -->
 <div class="bottom-section">
-  <div class="section-header">
-    <div class="hero-tag">Lưu ý</div>
-    <h1>Cam kết & Điều khoản</h1>
+  <div class="bottom-section-header">
+    <div class="section-label">Lưu ý</div>
+    <h2>Cam kết & Điều khoản</h2>
   </div>
- 
+
   <div class="bottom-grid">
     <div class="note-block">
       <div class="nb-title">Cam kết của chúng tôi</div>
@@ -942,13 +855,14 @@
       </ul>
     </div>
   </div>
- 
+</div><!-- end bottom-section -->
+
 <div id="myblog-placeholder"></div>
- 
+
 <footer>
   <div id="footer-placeholder"></div>
 </footer>
- 
+
 <script>
   function switchTab(id, btn) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -956,13 +870,13 @@
     document.getElementById('tab-' + id).classList.add('active');
     btn.classList.add('active');
   }
- 
+
   fetch('footer.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer-placeholder').innerHTML = data;
     });
- 
+
   fetch('my-blogs.html')
     .then(response => response.text())
     .then(data => {
