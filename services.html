@@ -954,26 +954,8 @@
   </div>
 </div>
  
- 
+<div id="myblog-placeholder"></div>
 
-<!-- BLOG POSTS -->
-<div style="max-width: 860px; margin: 0 auto; padding: 0 32px 80px;">
-  <div class="hero-tag">Bài viết</div>
-  <h1 style="margin-bottom: 8px;">Các bài blog của tôi</h1>
-  <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">Khám phá thêm các chủ đề về Growth Marketing, Startup, và AI Marketing</p>
-
-  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-
-    <!-- Blog card 1 -->
-    <a href="startup-growth-framework.html" target="_blank" style="text-decoration: none; display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; transition: border-color .2s;" onmouseover="this.style.borderColor='var(--pink-400)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
-        <span style="font-size: 11px; font-weight: 600; background: var(--pink-100); color: var(--pink-600); padding: 3px 10px; border-radius: 20px; letter-spacing: .04em;">Growth Marketing</span>
-      </div>
-      <p style="font-size: 15px; font-weight: 600; color: var(--text-primary); line-height: 1.45; margin: 0;">Framework 3 Bước Giúp Startup Tăng Trưởng Bền Vững</p>
-    </a>
-
-  </div>
-</div>
 
 <footer>
   <div id="footer-placeholder"></div>
@@ -991,6 +973,11 @@
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-placeholder').innerHTML = data;
+  });
+	fetch('my-blogs.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('myblog-placeholder').innerHTML = data;
   });
 </script>
 </body>
