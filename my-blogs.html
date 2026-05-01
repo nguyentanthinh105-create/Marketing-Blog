@@ -36,7 +36,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
-  
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     /* ── HERO ── */
     .hero {
       max-width: 760px;
@@ -198,6 +205,7 @@
   <div class="hero-tag">All Articles</div>
   <h1>My Blogs</h1>
   <p class="hero-sub">Tổng hợp các bài viết về Growth Marketing, Product Strategy và Data — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+  <div class="hero-meta">
     <span class="dot">·</span>
     <span class="hero-meta-item" id="post-count">Đang tải...</span>
   </div>
@@ -214,19 +222,11 @@
 </div>
 
 <script>
-  // ─────────────────────────────────────────────────
-  // CONFIGURE THESE TWO LINES:
-  const GITHUB_USER = 'nguyentanthinh105-create';   // e.g. 'nguyentanthinh'
-  const GITHUB_REPO = 'Marketing-Blog';       // e.g. 'entity-studio'
-  // Folder inside the repo where your HTML articles live:
+  const GITHUB_USER    = 'nguyentanthinh105-create';
+  const GITHUB_REPO    = 'Marketing-Blog';
   const ARTICLES_FOLDER = 'new-article';
-  // Base URL to open articles (use raw GitHub Pages URL or repo pages URL):
-  // If hosted on GitHub Pages: `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`
-  // If linking to raw repo files:
-  const BASE_URL = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
-  // ─────────────────────────────────────────────────
-
-  const API_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+  const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+  const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
 
   async function loadBlogs() {
     const stateEl = document.getElementById('blog-state');
@@ -237,9 +237,7 @@
       const res = await fetch(API_URL);
       if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
 
-      const files = await res.json();
-
-      // Keep only .html files
+      const files    = await res.json();
       const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
       if (articles.length === 0) {
@@ -254,21 +252,16 @@
       gridEl.style.display  = 'grid';
 
       articles.forEach(file => {
-        // Derive a readable title from the filename
-        // e.g. "startup-growth-framework.html" → "Startup Growth Framework"
         const raw   = file.name.replace('.html', '');
         const title = raw.replace(/[-_]/g, ' ')
                         .replace(/\b\w/g, c => c.toUpperCase());
 
-        // Build the card
         const card = document.createElement('a');
         card.className = 'blog-card';
         card.href      = BASE_URL + file.name;
         card.target    = '_blank';
         card.rel       = 'noopener';
 
-        // Try to extract last commit date from file sha (not available without extra call),
-        // so we show the file name as a subtle meta label instead.
         card.innerHTML = `
           <div class="blog-card-tag">Article</div>
           <h3>${title}</h3>
