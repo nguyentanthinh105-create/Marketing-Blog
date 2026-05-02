@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="shortcut icon" type="image/png" href="./logo.png">
+  <link rel="apple-touch-icon" href="./logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="Growth Marketing">
+  <meta name="description" content="CRM không phải phần mềm — đó là cách bán hàng thông minh và có hệ thống. Bài viết giải thích vì sao CRM là nền tảng giúp SMEs chốt được đơn hàng giá trị cao, không bỏ sót cơ hội và xây dựng Lifetime Value.">
+  <title>CRM là gì? Vì sao CRM giúp SMEs chốt được các đơn hàng giá trị cao?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f8f5;
+      --surface: #ffffff;
+      --green-100: #eef5ee;
+      --green-200: #d4ebcf;
+      --green-300: #a8d5a0;
+      --green-500: #3a8c3f;
+      --green-600: #2d7032;
+      --green-700: #1f5224;
+      --text-primary: #1a1f1a;
+      --text-secondary: #4a5549;
+      --text-muted: #7a8a79;
+      --border: #d8e4d6;
+      --h1: 48px;
+      --h2: 36px;
+      --body: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-badge {
+      background: var(--green-500);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .nav-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-100);
+      color: var(--green-600);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+      padding-bottom: 15px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-top: 8px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-meta-item { font-size: 13px; color: var(--text-muted); }
+    .hero-meta-item strong { color: var(--text-secondary); }
+    .dot { color: var(--border); }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+    }
+
+    /* ── EXEC SUMMARY ── */
+    .exec-summary {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-left: 4px solid var(--green-500);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .exec-summary .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 12px;
+    }
+    .exec-summary p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .exec-summary p:last-child { margin-bottom: 0; }
+    .exec-summary .formula {
+      background: var(--green-200);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-700);
+      margin-top: 8px;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 64px; }
+    .section-number {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: var(--h2);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      color: var(--text-primary);
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── BLOCKS ── */
+    .block {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .block-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 14px;
+    }
+    .block p {
+      font-size: var(--body);
+      color: var(--text-secondary);
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+    }
+    .block p:last-child { margin-bottom: 0; padding-bottom: 0; }
+
+    .block-insight {
+      background: var(--green-200);
+      border: none;
+      border-left: 3px solid var(--green-500);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+    }
+    .block-insight p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--green-700);
+      font-weight: 500;
+    }
+
+    .block-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* ── TABLES ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0;
+    }
+    .data-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--green-200);
+    }
+    .data-table td {
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--green-200);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { font-weight: 600; color: var(--green-600); }
+
+    /* ── MISTAKE LIST ── */
+    .mistake-list { list-style: none; }
+    .mistake-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0 3px;
+      border-bottom: 1px solid var(--border);
+      font-size: var(--body);
+      color: var(--text-secondary);
+    }
+    .mistake-list li:last-child { border-bottom: none; }
+    .mistake-list .icon {
+      width: 20px; height: 20px;
+      background: #fee2e2;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .check-list { list-style: none; }
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0 3px;
+      border-bottom: 1px solid var(--border);
+      font-size: var(--body);
+      color: var(--text-secondary);
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-list .icon {
+      width: 20px; height: 20px;
+      background: var(--green-200);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── PIPELINE FLOW ── */
+    .pipeline-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pipeline-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+    .pipeline-dot {
+      width: 32px; height: 32px;
+      background: var(--green-500);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .pipeline-line {
+      width: 2px;
+      height: 20px;
+      background: var(--green-300);
+      margin: 0 auto;
+    }
+    .pipeline-label {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--green-200);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .pipeline-step:last-child .pipeline-line { display: none; }
+
+    /* ── 3-COL CARDS ── */
+    .card-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .card .card-icon { font-size: 22px; margin-bottom: 8px; }
+    .card .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 6px;
+    }
+    .card p { font-size: 13px; color: var(--text-secondary); }
+
+    /* ── BEFORE/AFTER GRID ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 0;
+    }
+    .ba-col {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .ba-col.bad { background: #fff8f8; border-color: #f9c8c8; }
+    .ba-col .ba-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .ba-col.bad .ba-title { color: #c0392b; }
+    .ba-col.good .ba-title { color: var(--green-600); }
+    .ba-col p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding-bottom: 3px;
+      margin-bottom: 4px;
+    }
+
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: var(--green-700);
+      border-radius: 14px;
+      padding: 48px 40px;
+      color: #fff;
+      margin-top: 64px;
+    }
+    .conclusion .tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 16px;
+    }
+    .conclusion h2 { color: #fff; font-size: 32px; margin-bottom: 24px; }
+    .conclusion .pitfalls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .pitfall-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .pitfall-card .num { font-size: 24px; font-weight: 800; color: var(--green-300); margin-bottom: 8px; }
+    .pitfall-card p { font-size: 13px; color: rgba(255,255,255,.75); }
+    .formula-final {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .formula-arrow { color: var(--green-300); margin: 0 8px; }
+
+    /* ── BLOG SECTION ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      animation: fadeUp .4s ease both;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover {
+      border-color: var(--green-300);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(58,140,63,.08);
+    }
+    .blog-card-tag { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--green-500); margin-bottom: 10px; }
+    .blog-card h3 { font-size: 16px; font-weight: 700; line-height: 1.4; color: var(--text-primary); padding-bottom: 3px; flex: 1; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .blog-card-meta { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .blog-card-arrow { font-size: 16px; color: var(--green-500); font-weight: 700; }
+    .state-block { background: var(--green-100); border: 1px solid var(--green-200); border-radius: 10px; padding: 32px 28px; text-align: center; margin-bottom: 32px; }
+    .spinner { width: 24px; height: 24px; border: 2px solid var(--green-200); border-top-color: var(--green-500); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .blog-section-hero { max-width: 860px; margin: 0 auto; padding: 40px 32px 24px; }
+    .blog-section-title { font-size: 32px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; padding-bottom: 5px; letter-spacing: -.01em; }
+    .blog-section-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
+    .blog-section-content { max-width: 860px; margin: 0 auto; padding: 0 32px 60px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 0 32px; }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card { border: 1px solid var(--border); border-radius: 14px; padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; background: var(--surface); gap: 24px; margin-bottom: 32px; }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 140px; width: auto; display: block; }
+    .footer-logo-placeholder { height: 140px; width: 140px; background: var(--text-primary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap; }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { animation: fadeUp .6s ease both; }
+    .exec-summary { animation: fadeUp .6s .15s ease both; }
+    .section { animation: fadeUp .5s .1s ease both; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      :root { --h1: 30px; --h2: 22px; --body: 15px; }
+      .nav-inner { padding: 0 16px; }
+      .nav-label { display: none; }
+      .hero { padding: 36px 16px 28px; }
+      h1 { font-size: 30px; line-height: 1.2; padding-bottom: 12px; }
+      .hero-sub { font-size: 16px; }
+      .hero-meta { gap: 12px; margin-top: 20px; padding-top: 16px; flex-wrap: wrap; }
+      .content { padding: 0 16px 60px; }
+      .exec-summary { padding: 18px 16px; margin-bottom: 36px; }
+      .section { margin-bottom: 44px; }
+      .section-desc { font-size: 15px; padding-bottom: 16px; margin-bottom: 20px; }
+      .block { padding: 16px; }
+      .block-grid { grid-template-columns: 1fr; gap: 12px; }
+      .before-after { grid-template-columns: 1fr; }
+      .card-row-3 { grid-template-columns: 1fr; }
+      .data-table { font-size: 13px; }
+      .data-table th, .data-table td { padding: 8px; }
+      .block:has(.data-table) { overflow-x: auto; padding: 16px 12px; }
+      .conclusion { padding: 28px 20px; margin-top: 40px; border-radius: 10px; }
+      .conclusion h2 { font-size: 22px; margin-bottom: 16px; }
+      .conclusion .pitfalls { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+      .formula-final { font-size: 14px; padding: 16px; }
+      .footer-inner { padding: 0 16px; }
+      .footer-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 16px; }
+      .footer-logo img { height: 100px; }
+      .footer-info { text-align: left; }
+      .footer-brand { align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-nav { flex-wrap: wrap; gap: 12px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-section-hero { padding: 28px 16px 16px; }
+      .blog-section-content { padding: 0 16px 40px; }
+      h2 { font-size: 24px; }
+      div[style*="padding: 0 32px"] { padding: 0 16px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="nav-inner">
+    <span class="nav-badge">Growth Marketing</span>
+    <span class="nav-label">Fullstack Growth Marketing</span>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div style="max-width: 760px; margin: 0 auto; padding: 0 32px;">
+  <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/service.html" target="_blank">
+    <img src="../banner@2x.png" style="width: 100%; height: auto; display: block;">
+  </a>
+</div>
+<br>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Sales System cho SME</div>
+  <h1>CRM là gì? Vì sao CRM<br>giúp SMEs chốt được<br>đơn hàng giá trị cao?</h1>
+  <p class="hero-sub">CRM không phải phần mềm — đó là "bộ não vận hành khách hàng" của doanh nghiệp. Không có CRM, SMEs mãi chạy theo đơn nhỏ và không đủ nền tảng để chốt deal lớn.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item"><strong>Nguyễn Tấn Thịnh</strong></span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">10 phút đọc</span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">Growth Marketing</span>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- EXEC SUMMARY -->
+  <div class="exec-summary">
+    <div class="label">Executive Summary</div>
+    <p>CRM gồm 3 lớp: <strong>Tool</strong> (phần mềm lưu trữ), <strong>Process</strong> (quy trình tiếp cận – nuôi dưỡng – bán hàng) và <strong>Culture</strong> (tư duy lấy khách hàng làm trung tâm). Thiếu bất kỳ lớp nào, CRM chỉ là Excel nâng cấp.</p>
+    <div class="formula">
+      Hiểu khách sâu &nbsp;+&nbsp; Phân loại lead đúng &nbsp;+&nbsp; Follow-up đúng thời điểm &nbsp;=&nbsp; Chốt deal giá trị cao
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-number">Phần 01</div>
+    <h2>CRM là gì? Hiểu đúng để dùng đúng</h2>
+    <p class="section-desc">CRM không đơn thuần là một phần mềm quản lý khách hàng — đó là hệ thống đảm bảo không bỏ sót cơ hội, không quên follow-up, không mất khách tiềm năng.</p>
+
+    <div class="block">
+      <div class="block-title">3 lớp cốt lõi của CRM</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Thành phần</th>
+            <th>Vai trò</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tool</td>
+            <td>Phần mềm (HubSpot, Zoho, Salesforce...) để lưu trữ và quản lý dữ liệu</td>
+          </tr>
+          <tr>
+            <td>Process</td>
+            <td>Quy trình tiếp cận – nuôi dưỡng – bán hàng – chăm sóc sau bán</td>
+          </tr>
+          <tr>
+            <td>Culture</td>
+            <td>Tư duy lấy khách hàng làm trung tâm trong toàn bộ tổ chức</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block-grid">
+      <div class="block" style="margin-bottom: 0;">
+        <div class="block-title">Sai lầm phổ biến</div>
+        <ul class="mistake-list">
+          <li><span class="icon">✕</span>Xem CRM chỉ là Excel nâng cấp</li>
+          <li><span class="icon">✕</span>Lưu data nhưng không khai thác</li>
+          <li><span class="icon">✕</span>Có tool nhưng không có quy trình</li>
+        </ul>
+      </div>
+      <div class="block" style="margin-bottom: 0;">
+        <div class="block-title">Thực tế CRM là gì?</div>
+        <ul class="check-list">
+          <li><span class="icon">✓</span>Hệ thống bán hàng thông minh</li>
+          <li><span class="icon">✓</span>Bán đúng người – đúng cách</li>
+          <li><span class="icon">✓</span>Tài sản dữ liệu dài hạn của doanh nghiệp</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block-insight" style="margin-top: 20px;">
+      <p>CRM không phải công cụ — mà là cách làm sales thông minh và có hệ thống. Thiếu CRM, mọi nỗ lực bán hàng đều phụ thuộc vào trí nhớ cá nhân.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-number">Phần 02</div>
+    <h2>Vấn đề của SMEs khi không có CRM</h2>
+    <p class="section-desc">Trước khi hiểu vì sao CRM giúp chốt deal lớn, cần nhìn rõ "nút thắt" đang khiến doanh nghiệp mãi loay hoay với đơn nhỏ.</p>
+
+    <div class="card-row-3">
+      <div class="card">
+        <div class="card-icon">🔁</div>
+        <div class="card-label">Mất khách khi bán</div>
+        <p>Quên follow-up, không nhớ khách đã hỏi gì, tư vấn lại từ đầu mỗi lần gặp.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-label">Không phân biệt khách</div>
+        <p>Khách nóng và khách lạnh bị xử lý như nhau. Người sẵn sàng trả tiền không được ưu tiên.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <div class="card-label">Không tích lũy insight</div>
+        <p>Mỗi sale làm lại từ đầu. Không có dữ liệu để cải thiện tỉ lệ chốt theo thời gian.</p>
+      </div>
+    </div>
+
+    <div class="block-insight" style="margin-top: 20px;">
+      <p>SMEs mãi chạy theo đơn nhỏ — không phải vì thiếu khách, mà vì không đủ nền tảng hệ thống để nuôi dưỡng và chốt deal giá trị cao.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-number">Phần 03</div>
+    <h2>6 Lý do CRM giúp chốt đơn hàng giá trị cao</h2>
+    <p class="section-desc">Khách hàng giá trị cao không mua vì giá rẻ hay khuyến mãi — họ mua vì được hiểu, được tư vấn đúng và được tin tưởng.</p>
+
+    <!-- 3.1 -->
+    <div class="block">
+      <div class="block-title">01 · Hiểu khách sâu — nền tảng của deal lớn</div>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: #c0392b; margin-bottom: 8px;">Không có CRM:</p>
+          <p>• Sale bán sản phẩm theo kịch bản cố định</p>
+          <p>• Không biết khách đã xem gì, hỏi gì, chê gì</p>
+          <p>• Mỗi cuộc gặp như lần đầu tiên</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Có CRM:</p>
+          <p>• Tracking hành vi đầy đủ</p>
+          <p>• Lưu lịch sử tương tác chi tiết</p>
+          <p>• Sale đề xuất giải pháp cá nhân hóa</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.2 -->
+    <div class="block">
+      <div class="block-title">02 · Phân loại lead — tập trung đúng khách có tiền</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Loại Lead</th>
+            <th>Đặc điểm</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Hot 🔥</td><td>Có nhu cầu rõ ràng, sẵn sàng chi</td><td>Chốt nhanh</td></tr>
+          <tr><td>Warm ☀️</td><td>Đang cân nhắc, cần thêm thông tin</td><td>Nuôi dưỡng</td></tr>
+          <tr><td>Cold ❄️</td><td>Chưa rõ nhu cầu</td><td>Remarketing</td></tr>
+          <tr><td>Unqualified</td><td>Không phù hợp với sản phẩm</td><td>Loại bỏ sớm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block-insight">
+      <p>Deal lớn không đến từ số lượng lead — mà từ việc chọn đúng lead và ưu tiên nguồn lực cho khách có khả năng chi trả cao.</p>
+    </div>
+
+    <!-- 3.3 -->
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">03 · Follow-up đúng thời điểm — yếu tố quyết định</div>
+      <p style="margin-bottom: 16px;">80% deal lớn không chốt ở lần đầu — mà ở lần follow-up thứ 3–5. CRM đảm bảo không bỏ sót một lần nào.</p>
+      <div class="before-after">
+        <div class="ba-col bad">
+          <div class="ba-title">Không CRM</div>
+          <p>• Follow-up bằng cảm tính</p>
+          <p>• Nhớ bằng đầu, dễ quên</p>
+          <p>• Bỏ sót lead tiềm năng</p>
+        </div>
+        <div class="ba-col good">
+          <div class="ba-title">Có CRM</div>
+          <p>• Follow-up theo hệ thống</p>
+          <p>• Nhắc lịch tự động</p>
+          <p>• Không bỏ sót bất kỳ lead nào</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 -->
+    <div class="block">
+      <div class="block-title">04 · Xây trải nghiệm — tăng niềm tin, giảm kháng giá</div>
+      <p>Khách hàng giá trị cao mua vì trải nghiệm, không chỉ vì sản phẩm. CRM cho phép:</p>
+      <ul class="check-list" style="margin-top: 12px;">
+        <li><span class="icon">✓</span>Cá nhân hóa onboarding ngay từ lần đầu</li>
+        <li><span class="icon">✓</span>Ghi nhớ thông tin và sở thích của từng khách</li>
+        <li><span class="icon">✓</span>Chăm sóc có chiều sâu sau bán hàng</li>
+      </ul>
+    </div>
+
+    <!-- 3.5 -->
+    <div class="block">
+      <div class="block-title">05 · Upsell & Lifetime Value — nguồn lợi nhuận thực sự</div>
+      <div class="before-after">
+        <div class="ba-col bad">
+          <div class="ba-title">Không CRM</div>
+          <p>• Mỗi khách = 1 lần mua</p>
+          <p>• Chốt xong là "biến mất"</p>
+          <p>• Không có upsell / referral</p>
+        </div>
+        <div class="ba-col good">
+          <div class="ba-title">Có CRM</div>
+          <p>• Mỗi khách = vòng đời giá trị</p>
+          <p>• Upsell đúng nhu cầu theo hành vi</p>
+          <p>• Kích hoạt referral có hệ thống</p>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 14px;">Tăng doanh thu không phải bằng tìm thêm khách mới — mà bằng khai thác sâu khách hiện tại.</p>
+    </div>
+
+    <!-- 3.6 -->
+    <div class="block">
+      <div class="block-title">06 · Biến 1 sale thành hệ thống bán hàng</div>
+      <p style="margin-bottom: 16px;">CRM chuẩn hóa quy trình, lưu insight và tự động hóa — giúp 1 người xử lý được nhiều lead hơn, chất lượng hơn và ít sai sót hơn.</p>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Trước CRM:</p>
+          <p>• Quy trình phụ thuộc cá nhân</p>
+          <p>• Insight mất khi nhân sự nghỉ</p>
+          <p>• Không scale được</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Sau CRM:</p>
+          <p>• Quy trình chuẩn hóa, ai cũng làm được</p>
+          <p>• Insight tích lũy dài hạn</p>
+          <p>• Scale mà không mất chất lượng</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-number">Phần 04</div>
+    <h2>Cấu trúc CRM tối thiểu cho SMEs</h2>
+    <p class="section-desc">Bắt đầu không cần tool phức tạp. Một hệ CRM cơ bản chỉ cần 5 bước — có thể triển khai ngay bằng Google Sheet.</p>
+
+    <div class="block">
+      <div class="block-title">Pipeline tối thiểu</div>
+      <div class="pipeline-flow">
+        <div class="pipeline-step">
+          <div class="pipeline-col">
+            <div class="pipeline-dot">📥</div>
+            <div class="pipeline-line"></div>
+          </div>
+          <div class="pipeline-label">Thu Lead (Form / Ads / Referral)</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-col">
+            <div class="pipeline-dot">📋</div>
+            <div class="pipeline-line"></div>
+          </div>
+          <div class="pipeline-label">Google Sheet CRM — lưu toàn bộ thông tin</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-col">
+            <div class="pipeline-dot">🏷️</div>
+            <div class="pipeline-line"></div>
+          </div>
+          <div class="pipeline-label">Phân loại tự động (Hot / Warm / Cold)</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-col">
+            <div class="pipeline-dot">📬</div>
+            <div class="pipeline-line"></div>
+          </div>
+          <div class="pipeline-label">Follow-up (Email / Zalo / Gọi điện)</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-col">
+            <div class="pipeline-dot">📊</div>
+            <div class="pipeline-line"></div>
+          </div>
+          <div class="pipeline-label">Tracking & Báo cáo tỉ lệ chốt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">Các trường dữ liệu tối thiểu cần có</div>
+      <div class="block-grid">
+        <div>
+          <p>• Nguồn khách (Ads / Referral / Organic)</p>
+          <p>• Nhu cầu cụ thể</p>
+          <p>• Giai đoạn pipeline hiện tại</p>
+        </div>
+        <div>
+          <p>• Trạng thái lead (Hot / Warm / Cold)</p>
+          <p>• Lịch sử tương tác đầy đủ</p>
+          <p>• Giá trị deal dự kiến</p>
+        </div>
+      </div>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">Đây chính là "tài sản vô hình" của doanh nghiệp — không bị mất khi nhân sự thay đổi.</p>
+    </div>
+
+    <div class="block-insight">
+      <p>Đừng bắt đầu bằng tool phức tạp. Bắt đầu bằng 1 bảng CRM chuẩn + 1 quy trình follow-up + 1 logic phân loại khách — đó là đủ để thắng đối thủ chưa có gì.</p>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <div class="tag">Kết luận & Góc nhìn chiến lược</div>
+    <h2>Doanh nghiệp thắng là doanh nghiệp quản trị khách hàng tốt nhất</h2>
+    <div class="pitfalls">
+      <div class="pitfall-card">
+        <div class="num">01</div>
+        <p>Xem CRM là tool, không phải hệ thống — có phần mềm nhưng không có quy trình</p>
+      </div>
+      <div class="pitfall-card">
+        <div class="num">02</div>
+        <p>Không phân loại lead — xử lý khách nóng và khách lạnh như nhau</p>
+      </div>
+      <div class="pitfall-card">
+        <div class="num">03</div>
+        <p>Chốt xong là bỏ — mất toàn bộ cơ hội upsell và referral</p>
+      </div>
+    </div>
+    <div class="formula-final">
+      CRM không giúp có thêm khách<span class="formula-arrow">—</span>CRM giúp <strong>không đánh mất khách có giá trị cao</strong>
+    </div>
+    <p style="color:rgba(255,255,255,.65); font-size:14px; margin-top:20px; text-align:center;">Trong bối cảnh chi phí ads tăng và khách hàng khó tính hơn — đây mới là nơi lợi nhuận thực sự nằm.</p>
+  </div>
+
+</div><!-- end content -->
+
+<!-- BLOG SECTION -->
+<div id="myblog-placeholder"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="../logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · Fun fact: 70% trang web này được tạo bởi AI</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+const myBlogHTML = `
+  <div class="blog-section-hero">
+    <h2 class="blog-section-title">Các bài blog của tôi</h2>
+    <p class="blog-section-sub">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+    <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/" target="_blank" rel="noopener" style="text-decoration: none;">
+      <span style="background: #3a8c3f; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 12px;">Xem tất cả bài viết của tôi</span>
+    </a>
+  </div>
+  <div class="blog-section-content">
+    <div id="blog-state" class="state-block">
+      <div class="spinner"></div>
+      <div style="font-weight: 600; color: #4a5549; margin-bottom: 4px;">Đang tải bài viết...</div>
+    </div>
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+`;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
+
+const GITHUB_USER     = 'nguyentanthinh105-create';
+const GITHUB_REPO     = 'Marketing-Blog';
+const ARTICLES_FOLDER = 'new-article';
+const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+function parseMetaFromHTML(html) {
+  const getMeta = (name) => {
+    const m = html.match(new RegExp('<meta[^>]+name=["\']' + name + '["\'][^>]+content=["\']([^"\']*)["\']', 'i'))
+           || html.match(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+name=["\']' + name + '["\']', 'i'));
+    return m ? m[1].trim() : null;
+  };
+  const getTitle = () => {
+    const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    return m ? m[1].trim() : null;
+  };
+  return {
+    category:    getMeta('category')    || 'Article',
+    description: getMeta('description') || '',
+    title:       getMeta('title')       || getTitle() || 'Bài viết'
+  };
+}
+
+async function loadBlogs() {
+  const stateEl = document.getElementById('blog-state');
+  const gridEl  = document.getElementById('blog-grid');
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('GitHub API error');
+    const files    = await res.json();
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+    if (!articles.length) {
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục.</div>`;
+      return;
+    }
+    stateEl.style.display = 'none';
+    gridEl.style.display  = 'grid';
+    const cards = await Promise.all(articles.map(async (file) => {
+      try {
+        const href     = PAGES_BASE_URL + file.name;
+        const htmlText = await (await fetch(href)).text();
+        const { category, description, title } = parseMetaFromHTML(htmlText);
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href = href;
+        card.target = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          ${description ? `<p class="blog-card-meta">${description}</p>` : ''}
+          <div class="blog-card-footer">
+            <span class="blog-card-arrow">Đọc thêm →</span>
+          </div>`;
+        return card;
+      } catch { return null; }
+    }));
+    cards.forEach(c => { if (c) gridEl.appendChild(c); });
+  } catch {
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
+  }
+}
+
+loadBlogs();
+</script>
+</body>
+</html>
