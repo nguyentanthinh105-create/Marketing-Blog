@@ -1131,27 +1131,29 @@ const myBlogHTML = `
 `;
 document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
 
-// 3. LOGIC LẤY META TỪ FRONTMATTER CỦA FILE .MD
+// 3. LOGIC LẤY META TỪ FILE HTML
 const GITHUB_USER     = 'nguyentanthinh105-create';
 const GITHUB_REPO     = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
-const RAW_BASE_URL    = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/${ARTICLES_FOLDER}/`;
 const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
 const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
 
-// Đọc giá trị từ YAML frontmatter: ---\nkey: value\n---
-function parseFrontmatter(text) {
-  const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const result = {};
-  for (const line of match[1].split('\n')) {
-    const sep = line.indexOf(':');
-    if (sep === -1) continue;
-    const key = line.slice(0, sep).trim();
-    const val = line.slice(sep + 1).trim().replace(/^["']|["']$/g, '');
-    result[key] = val;
-  }
-  return result;
+/* ── Parse category, description, title từ meta tags trong HTML ── */
+function parseMetaFromHTML(html) {
+  const getMeta = (name) => {
+    const m = html.match(new RegExp('<meta[^>]+name=["\']' + name + '["\'][^>]+content=["\']([^"\']*)["\']', 'i'))
+           || html.match(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+name=["\']' + name + '["\']', 'i'));
+    return m ? m[1].trim() : null;
+  };
+  const getTitle = () => {
+    const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    return m ? m[1].trim() : null;
+  };
+  return {
+    category:    getMeta('category')    || 'Article',
+    description: getMeta('description') || '',
+    title:       getMeta('title')       || getTitle() || 'Bài viết'
+  };
 }
 
 async function loadBlogs() {
@@ -1163,7 +1165,8 @@ async function loadBlogs() {
     if (!res.ok) throw new Error(`GitHub API error`);
 
     const files    = await res.json();
-    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.md'));
+    // Chỉ đọc file .html
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
     if (articles.length === 0) {
       stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
@@ -1175,14 +1178,10 @@ async function loadBlogs() {
 
     const blogPromises = articles.map(async (file) => {
       try {
-        const response = await fetch(RAW_BASE_URL + file.name);
-        const mdText   = await response.text();
-        const meta     = parseFrontmatter(mdText);
-
-        const category    = meta.category    || 'Article';
-        const description = meta.description || '';
-        const title       = meta.title       || file.name.replace('.md', '').replace(/[-_]/g, ' ');
-        const href        = PAGES_BASE_URL   + file.name.replace('.md', '.html');
+        const href     = PAGES_BASE_URL + file.name;
+        const response = await fetch(href);
+        const htmlText = await response.text();
+        const { category, description, title } = parseMetaFromHTML(htmlText);
 
         const card = document.createElement('a');
         card.className = 'blog-card';
