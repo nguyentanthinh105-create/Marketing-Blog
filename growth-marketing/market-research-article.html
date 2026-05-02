@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="shortcut icon" type="image/png" href="./logo.png">
+  <link rel="apple-touch-icon" href="./logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="Growth Marketing">
+  <meta name="description" content="Market research không phải bước tùy chọn — đó là nền tảng quyết định bạn build đúng sản phẩm, bán cho đúng người, và scale đúng cách. Bài viết này hướng dẫn lộ trình nghiên cứu thị trường bài bản cho Startup & SME.">
+  <title>Market Research – Giai đoạn quyết định thành bại của Startup & SME</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f8f5;
+      --surface: #ffffff;
+      --green-100: #eef5ee;
+      --green-200: #d4ebcf;
+      --green-300: #a8d5a0;
+      --green-500: #3a8c3f;
+      --green-600: #2d7032;
+      --green-700: #1f5224;
+      --text-primary: #1a1f1a;
+      --text-secondary: #4a5549;
+      --text-muted: #7a8a79;
+      --border: #d8e4d6;
+      --h1: 48px;
+      --h2: 36px;
+      --body: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-badge {
+      background: var(--green-500);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .nav-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-100);
+      color: var(--green-600);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+      padding-bottom: 15px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-top: 8px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-meta-item {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .hero-meta-item strong { color: var(--text-secondary); }
+    .dot { color: var(--border); }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+    }
+
+    /* ── EXECUTIVE SUMMARY ── */
+    .exec-summary {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-left: 4px solid var(--green-500);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .exec-summary .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 12px;
+    }
+    .exec-summary p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .exec-summary p:last-child { margin-bottom: 0; }
+    .exec-summary .formula {
+      background: var(--green-200);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-700);
+      margin-top: 8px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 64px;
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: var(--h2);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      color: var(--text-primary);
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── BLOCKS ── */
+    .block {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .block-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 14px;
+    }
+    .block p {
+      font-size: var(--body);
+      color: var(--text-secondary);
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+    }
+    .block p:last-child { margin-bottom: 0; padding-bottom: 0; }
+
+    .block-insight {
+      background: var(--green-200);
+      border: none;
+      border-left: 3px solid var(--green-500);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+    }
+    .block-insight p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--green-700);
+      font-weight: 500;
+    }
+
+    .block-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* ── TABLE ── */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0;
+    }
+    .comparison-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--green-200);
+    }
+    .comparison-table td {
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--green-200);
+      vertical-align: top;
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: #c0392b; font-weight: 500; }
+    .comparison-table td:last-child  { color: var(--green-600); font-weight: 500; }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 18px;
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 8px;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      background: var(--green-500);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-body { font-size: 14px; color: var(--text-secondary); }
+    .step-body strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
+
+    /* ── MISTAKE LIST ── */
+    .mistake-list { list-style: none; }
+    .mistake-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: var(--body);
+      color: var(--text-secondary);
+      padding-bottom: 3px;
+    }
+    .mistake-list li:last-child { border-bottom: none; }
+    .mistake-list .icon {
+      width: 20px; height: 20px;
+      background: #fee2e2;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── COMPETITOR 3-CARD ── */
+    .card-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 0;
+    }
+    .card {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .card .card-icon { font-size: 22px; margin-bottom: 8px; }
+    .card .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 6px;
+    }
+    .card p { font-size: 13px; color: var(--text-secondary); }
+
+    /* ── ROADMAP FLOW ── */
+    .roadmap-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 0;
+    }
+    .roadmap-item {
+      flex: 1;
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .roadmap-item .ri-icon { font-size: 22px; margin-bottom: 6px; }
+    .roadmap-item .ri-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 4px;
+    }
+    .roadmap-item p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .roadmap-arrow {
+      font-size: 18px;
+      color: var(--green-500);
+      font-weight: 700;
+      padding: 0 10px;
+      flex-shrink: 0;
+    }
+
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: var(--green-700);
+      border-radius: 14px;
+      padding: 48px 40px;
+      color: #fff;
+      margin-top: 64px;
+    }
+    .conclusion .tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 16px;
+    }
+    .conclusion h2 {
+      color: #fff;
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+    .conclusion .pitfalls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .pitfall-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .pitfall-card .num {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--green-300);
+      margin-bottom: 8px;
+    }
+    .pitfall-card p { font-size: 13px; color: rgba(255,255,255,.75); }
+    .formula-final {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .01em;
+    }
+    .formula-arrow { color: var(--green-300); margin: 0 8px; }
+
+    /* ── BLOG SECTION ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      animation: fadeUp .4s ease both;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover {
+      border-color: var(--green-300);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(58,140,63,.08);
+    }
+    .blog-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 10px;
+    }
+    .blog-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text-primary);
+      padding-bottom: 3px;
+      flex: 1;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .blog-card-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-arrow { font-size: 16px; color: var(--green-500); font-weight: 700; }
+
+    .state-block {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 32px 28px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 2px solid var(--green-200);
+      border-top-color: var(--green-500);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .blog-section-hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 32px 24px;
+    }
+    .blog-section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      letter-spacing: -.01em;
+    }
+    .blog-section-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .blog-section-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px 60px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 32px;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 36px; display: flex; align-items: center;
+      justify-content: space-between; background: var(--surface);
+      gap: 24px; margin-bottom: 32px;
+    }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 140px; width: auto; display: block; }
+    .footer-logo-placeholder {
+      height: 140px; width: 140px; background: var(--text-primary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name  { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp .6s ease both; }
+    .exec-summary { animation: fadeUp .6s .15s ease both; }
+    .section { animation: fadeUp .5s .1s ease both; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      :root { --h1: 30px; --h2: 22px; --body: 15px; }
+      .nav-inner { padding: 0 16px; }
+      .nav-label { display: none; }
+      .hero { padding: 36px 16px 28px; }
+      h1 { font-size: 30px; line-height: 1.2; padding-bottom: 12px; }
+      .hero-sub { font-size: 16px; }
+      .hero-meta { gap: 12px; margin-top: 20px; padding-top: 16px; flex-wrap: wrap; }
+      .content { padding: 0 16px 60px; }
+      .exec-summary { padding: 18px 16px; margin-bottom: 36px; }
+      .section { margin-bottom: 44px; }
+      .section-desc { font-size: 15px; padding-bottom: 16px; margin-bottom: 20px; }
+      .block { padding: 16px; }
+      .block-grid { grid-template-columns: 1fr; gap: 12px; }
+      .card-row-3 { grid-template-columns: 1fr; }
+      .roadmap-flow { flex-direction: column; gap: 8px; }
+      .roadmap-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .comparison-table { font-size: 13px; }
+      .comparison-table th, .comparison-table td { padding: 8px; }
+      .block:has(.comparison-table) { overflow-x: auto; padding: 16px 12px; }
+      .conclusion { padding: 28px 20px; margin-top: 40px; border-radius: 10px; }
+      .conclusion h2 { font-size: 22px; margin-bottom: 16px; }
+      .conclusion .pitfalls { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+      .formula-final { font-size: 14px; padding: 16px; }
+      .footer-inner { padding: 0 16px; }
+      .footer-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 16px; }
+      .footer-logo img { height: 100px; }
+      .footer-info { text-align: left; }
+      .footer-brand { align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-nav { flex-wrap: wrap; gap: 12px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-section-hero { padding: 28px 16px 16px; }
+      .blog-section-content { padding: 0 16px 40px; }
+      h2 { font-size: 24px; }
+      div[style*="padding: 0 32px"] { padding: 0 16px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="nav-inner">
+    <span class="nav-badge">Growth Marketing</span>
+    <span class="nav-label">Fullstack Growth Marketing</span>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div style="max-width: 760px; margin: 0 auto; padding: 0 32px;">
+  <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/service.html" target="_blank">
+    <img src="../banner@2x.png" style="width: 100%; height: auto; display: block;">
+  </a>
+</div>
+<br>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Chiến lược cho Startup & SME</div>
+  <h1>Market Research –<br>Giai đoạn quyết định<br>thành bại</h1>
+  <p class="hero-sub">Không ít doanh nghiệp thất bại không phải vì sản phẩm kém, mà vì họ xây dựng sản phẩm dựa trên niềm tin chủ quan thay vì dữ liệu thị trường.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item"><strong>Nguyễn Tấn Thịnh</strong></span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">10 phút đọc</span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">Growth Marketing</span>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- EXEC SUMMARY -->
+  <div class="exec-summary">
+    <div class="label">Executive Summary</div>
+    <p>Market research bài bản gồm 3 giai đoạn: <strong>Exploratory</strong> (khám phá insight), <strong>Descriptive</strong> (định lượng & xác nhận), và <strong>Causal</strong> (tìm nguyên nhân để tối ưu). Mỗi giai đoạn giải quyết một câu hỏi khác nhau và dẫn đến quyết định kinh doanh khác nhau.</p>
+    <div class="formula">
+      Exploratory (insight) &nbsp;→&nbsp; Descriptive (dữ liệu) &nbsp;→&nbsp; Causal (tối ưu) &nbsp;=&nbsp; Tăng trưởng đúng hướng
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-number">Sai lầm 01</div>
+    <h2>Bỏ qua bước "nghiên cứu đề bài"</h2>
+    <p class="section-desc">Bước đầu tiên trong market research lại thường bị xem nhẹ nhất — và đây chính là nguyên nhân khiến toàn bộ dữ liệu thu thập sau đó trở nên vô nghĩa.</p>
+
+    <div class="block">
+      <div class="block-title">Doanh nghiệp thường mắc lỗi gì?</div>
+      <ul class="mistake-list">
+        <li>
+          <span class="icon">✕</span>
+          Lao ngay vào khảo sát hoặc chạy ads mà chưa xác định mục tiêu research
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          Không trả lời được câu hỏi: "Mục tiêu research này là gì?"
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          Thu thập dữ liệu rời rạc, không thể chuyển hóa thành quyết định kinh doanh
+        </li>
+      </ul>
+    </div>
+
+    <div class="block block-insight">
+      <p>Market research không phải là thu thập dữ liệu — mà là giải bài toán kinh doanh bằng dữ liệu. Nếu không rõ đề bài, mọi dữ liệu đều trở thành nhiễu.</p>
+    </div>
+
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">Câu hỏi cần trả lời trước khi bắt đầu</div>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Câu hỏi định hướng:</p>
+          <p>• Mục tiêu research là gì?</p>
+          <p>• Kết quả dùng để ra quyết định gì?</p>
+          <p>• Ai là người cần thông tin này nhất?</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Ví dụ đề bài rõ ràng:</p>
+          <p>• Tìm lý do tỷ lệ chuyển đổi thấp</p>
+          <p>• Xác định phân khúc khách hàng tiềm năng mới</p>
+          <p>• Hiểu rào cản mua hàng của tệp X</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-number">Sai lầm 02</div>
+    <h2>Cố xây "Persona hoàn chỉnh" ngay từ đầu</h2>
+    <p class="section-desc">Ở giai đoạn đầu, mục tiêu không phải là xây dựng chân dung khách hàng chi tiết — mà là xác định "vùng khách hàng" tiềm năng đủ để validate.</p>
+
+    <div class="block">
+      <div class="block-title">So sánh: Sai lầm phổ biến vs. Cách tiếp cận đúng</div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Sai lầm phổ biến</th>
+            <th>Cách tiếp cận đúng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cố define persona chi tiết ngay từ đầu</td>
+            <td>Chỉ cần xác định "vùng khách hàng"</td>
+          </tr>
+          <tr>
+            <td>Tin rằng mình đã hiểu khách hàng</td>
+            <td>Kiểm chứng mọi giả định bằng dữ liệu</td>
+          </tr>
+          <tr>
+            <td>Build sản phẩm trước, validate sau</td>
+            <td>Validate trước, build sau</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block block-insight" style="margin-top: 20px;">
+      <p>Rất nhiều doanh nghiệp rơi vào "ảo tưởng nhu cầu" — tạo ra sản phẩm mà họ nghĩ khách hàng cần, nhưng thực tế thị trường không có nhu cầu đủ lớn.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-number">Phần 03</div>
+    <h2>Nghiên cứu đối thủ: Không để copy, mà để định vị</h2>
+    <p class="section-desc">Phần lớn doanh nghiệp hoặc nghiên cứu quá lan man, hoặc chỉ nhìn vào đối thủ trực tiếp. Thực tế, bạn cần phân loại rõ 3 nhóm.</p>
+
+    <div class="card-row-3">
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-label">Đối thủ trực tiếp</div>
+        <p>Cùng phân khúc khách hàng. Sản phẩm & dịch vụ tương đồng. Cạnh tranh trực tiếp trên cùng thị trường.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔀</div>
+        <div class="card-label">Đối thủ gián tiếp tiềm ẩn</div>
+        <p>Cùng tệp khách hàng, nhưng giải quyết nhu cầu bằng cách khác. Nguy hiểm nhất vì dễ bị bỏ qua.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔭</div>
+        <div class="card-label">Đối thủ gián tiếp thứ cấp</div>
+        <p>Khác phân khúc khách hàng nhưng sản phẩm tương tự. Có thể trở thành đối thủ trực tiếp khi pivot.</p>
+      </div>
+    </div>
+
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">Framework nghiên cứu đối thủ — 4 câu hỏi cốt lõi</div>
+      <p>• Họ đang phục vụ ai?</p>
+      <p>• Giá sản phẩm / dịch vụ như thế nào?</p>
+      <p>• Mức độ giải quyết vấn đề của khách hàng ra sao?</p>
+      <p>• Điểm khác biệt chính của họ là gì?</p>
+    </div>
+
+    <div class="block block-insight">
+      <p>Mục tiêu cuối cùng không phải là "hiểu đối thủ" — mà là tìm ra khoảng trống thị trường (market gap) để định vị sản phẩm của bạn.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-number">Phần 04</div>
+    <h2>3 Phương pháp Market Research</h2>
+    <p class="section-desc">Một chiến lược research hiệu quả không chỉ dựa vào một phương pháp, mà là sự kết hợp đúng theo từng giai đoạn tăng trưởng.</p>
+
+    <div class="block">
+      <div class="block-title">Phương pháp 1: Exploratory Research – Khám phá Insight</div>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Dùng khi nào?</p>
+          <p>Khi bạn chưa hiểu khách hàng. Đây là bước bắt buộc ở giai đoạn đầu.</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Phương pháp:</p>
+          <p>• Phỏng vấn sâu 1:1</p>
+          <p>• Focus group</p>
+          <p>• Quan sát hành vi thực tế</p>
+        </div>
+      </div>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">👉 Đây là giai đoạn <strong>đặt câu hỏi đúng</strong>, không phải tìm câu trả lời ngay.</p>
+    </div>
+
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">Phương pháp 2: Descriptive Research – Định lượng & xác nhận</div>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Dùng khi nào?</p>
+          <p>Sau khi có insight. Dùng dữ liệu để kiểm chứng và định lượng.</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Phương pháp:</p>
+          <p>• Surveys (khảo sát diện rộng)</p>
+          <p>• Dữ liệu thứ cấp (báo cáo ngành)</p>
+          <p>• Nghiên cứu tại một thời điểm</p>
+        </div>
+      </div>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">👉 Đây là giai đoạn <strong>biến insight thành dữ liệu đo lường được</strong>.</p>
+    </div>
+
+    <div class="block" style="margin-top: 20px;">
+      <div class="block-title">Phương pháp 3: Causal Research – Tìm nguyên nhân thực sự</div>
+      <div class="block-grid">
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Dùng khi nào?</p>
+          <p>Giai đoạn nâng cao — khi bạn muốn biết cái gì thực sự tạo ra kết quả.</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; color: var(--green-600); margin-bottom: 8px;">Phương pháp:</p>
+          <p>• A/B Testing</p>
+          <p>• Experiment vs Control group</p>
+          <p>• Kiểm định giả thuyết</p>
+        </div>
+      </div>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">👉 Đây là giai đoạn <strong>tối ưu hóa để scale</strong> với dữ liệu xác thực.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-number">Phần 05</div>
+    <h2>Lộ trình Market Research chuẩn</h2>
+    <p class="section-desc">Ba giai đoạn liên tiếp — mỗi giai đoạn là đầu vào của giai đoạn tiếp theo. Không thể bỏ qua hoặc đảo ngược thứ tự.</p>
+
+    <div class="block">
+      <div class="roadmap-flow">
+        <div class="roadmap-item">
+          <div class="ri-icon">🔍</div>
+          <div class="ri-label">Exploratory</div>
+          <p>Chưa có dữ liệu<br>→ Khám phá insight</p>
+        </div>
+        <div class="roadmap-arrow">→</div>
+        <div class="roadmap-item">
+          <div class="ri-icon">📊</div>
+          <div class="ri-label">Descriptive</div>
+          <p>Có insight<br>→ Xác nhận bằng dữ liệu</p>
+        </div>
+        <div class="roadmap-arrow">→</div>
+        <div class="roadmap-item">
+          <div class="ri-icon">⚡</div>
+          <div class="ri-label">Causal</div>
+          <p>Có dữ liệu<br>→ Tối ưu bằng thử nghiệm</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block block-insight" style="margin-top: 20px;">
+      <p>Startup không chết vì cạnh tranh — mà chết vì không có nhu cầu thị trường. Market research chính là vũ khí ngăn bạn tối ưu cho một thị trường không tồn tại.</p>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <div class="tag">Kết luận & Mindset</div>
+    <h2>Market Research là Foundation, không phải Option</h2>
+    <div class="pitfalls">
+      <div class="pitfall-card">
+        <div class="num">01</div>
+        <p>Bỏ qua nghiên cứu đề bài trước khi thu thập dữ liệu</p>
+      </div>
+      <div class="pitfall-card">
+        <div class="num">02</div>
+        <p>Cố xây persona hoàn chỉnh khi chưa validate thị trường</p>
+      </div>
+      <div class="pitfall-card">
+        <div class="num">03</div>
+        <p>Chỉ nghiên cứu đối thủ trực tiếp, bỏ sót market gap</p>
+      </div>
+    </div>
+    <div class="formula-final">
+      Exploratory <span class="formula-arrow">→</span> Descriptive <span class="formula-arrow">→</span> Causal <span class="formula-arrow">=</span> Tăng trưởng đúng hướng
+    </div>
+    <p style="color:rgba(255,255,255,.65); font-size:14px; margin-top:20px; text-align:center;">Market research quyết định bạn build đúng sản phẩm, bán cho đúng người, và scale đúng cách.</p>
+  </div>
+
+</div><!-- end content -->
+
+<!-- BLOG SECTION -->
+<div id="myblog-placeholder"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="../logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · Fun fact: 70% trang web này được tạo bởi AI</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Blog section injection
+const myBlogHTML = `
+  <div class="blog-section-hero">
+    <h2 class="blog-section-title">Các bài blog của tôi</h2>
+    <p class="blog-section-sub">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+    <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/" target="_blank" rel="noopener" style="text-decoration: none;">
+      <span style="background: #3a8c3f; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 12px;">Xem tất cả bài viết của tôi</span>
+    </a>
+  </div>
+  <div class="blog-section-content">
+    <div id="blog-state" class="state-block">
+      <div class="spinner"></div>
+      <div style="font-weight: 600; color: #4a5549; margin-bottom: 4px;">Đang tải bài viết...</div>
+    </div>
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+`;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
+
+const GITHUB_USER     = 'nguyentanthinh105-create';
+const GITHUB_REPO     = 'Marketing-Blog';
+const ARTICLES_FOLDER = 'new-article';
+const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+function parseMetaFromHTML(html) {
+  const getMeta = (name) => {
+    const m = html.match(new RegExp('<meta[^>]+name=["\']' + name + '["\'][^>]+content=["\']([^"\']*)["\']', 'i'))
+           || html.match(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+name=["\']' + name + '["\']', 'i'));
+    return m ? m[1].trim() : null;
+  };
+  const getTitle = () => {
+    const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    return m ? m[1].trim() : null;
+  };
+  return {
+    category:    getMeta('category')    || 'Article',
+    description: getMeta('description') || '',
+    title:       getMeta('title')       || getTitle() || 'Bài viết'
+  };
+}
+
+async function loadBlogs() {
+  const stateEl = document.getElementById('blog-state');
+  const gridEl  = document.getElementById('blog-grid');
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('GitHub API error');
+    const files    = await res.json();
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+    if (!articles.length) {
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục.</div>`;
+      return;
+    }
+    stateEl.style.display = 'none';
+    gridEl.style.display  = 'grid';
+    const cards = await Promise.all(articles.map(async (file) => {
+      try {
+        const href     = PAGES_BASE_URL + file.name;
+        const htmlText = await (await fetch(href)).text();
+        const { category, description, title } = parseMetaFromHTML(htmlText);
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href = href;
+        card.target = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          ${description ? `<p class="blog-card-meta">${description}</p>` : ''}
+          <div class="blog-card-footer">
+            <span class="blog-card-arrow">Đọc thêm →</span>
+          </div>`;
+        return card;
+      } catch { return null; }
+    }));
+    cards.forEach(c => { if (c) gridEl.appendChild(c); });
+  } catch {
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
+  }
+}
+
+loadBlogs();
+</script>
+</body>
+</html>
