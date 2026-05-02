@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="shortcut icon" type="image/png" href="./logo.png">
+  <link rel="apple-touch-icon" href="./logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="Growth Marketing">
+  <meta name="description" content="Bài viết này giúp bạn giải mã các chỉ số Marketing theo cách mà phần lớn doanh nghiệp đang làm sai: không còn nhìn số để báo cáo, mà nhìn số để ra quyết định. Thay vì bị ngợp bởi hàng chục KPI, bạn sẽ biết cách đọc đúng phễu, xác định điểm nghẽn và biến data thành đòn bẩy tăng trưởng.">
+  <meta name="title" content="Cách đọc chỉ số Marketing để ra quyết định — không phải để báo cáo">
+  <title>Cách đọc chỉ số Marketing để ra quyết định — không phải để báo cáo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f8f5;
+      --surface: #ffffff;
+      --green-100: #eef5ee;
+      --green-200: #d4ebcf;
+      --green-300: #a8d5a0;
+      --green-500: #3a8c3f;
+      --green-600: #2d7032;
+      --green-700: #1f5224;
+      --text-primary: #1a1f1a;
+      --text-secondary: #4a5549;
+      --text-muted: #7a8a79;
+      --border: #d8e4d6;
+      --h1: 48px;
+      --h2: 36px;
+      --body: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-badge {
+      background: var(--green-500);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .nav-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-100);
+      color: var(--green-600);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+      padding-bottom: 15px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-top: 8px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-meta-item { font-size: 13px; color: var(--text-muted); }
+    .hero-meta-item strong { color: var(--text-secondary); }
+    .dot { color: var(--border); }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+    }
+
+    .exec-summary {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-left: 4px solid var(--green-500);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .exec-summary .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 12px;
+    }
+    .exec-summary p { color: var(--text-secondary); font-size: 15px; margin-bottom: 16px; }
+    .exec-summary .formula {
+      background: var(--green-200);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-700);
+      margin-top: 8px;
+    }
+
+    .section { margin-bottom: 64px; }
+    .section-number {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: var(--h2);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      color: var(--text-primary);
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .block {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .block-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 14px;
+    }
+    .block p { font-size: var(--body); color: var(--text-secondary); padding-bottom: 3px; margin-bottom: 6px; }
+    .block p:last-child { margin-bottom: 0; padding-bottom: 0; }
+
+    .block-insight {
+      background: var(--green-200);
+      border: none;
+      border-left: 3px solid var(--green-500);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+    }
+    .block-insight p { font-size: 15px; font-style: italic; color: var(--green-700); font-weight: 500; }
+
+    .block-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* Principle list */
+    .principle-list { display: flex; flex-direction: column; gap: 14px; }
+    .principle-item {
+      background: var(--surface);
+      border: 1px solid var(--green-200);
+      border-radius: 8px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .principle-num {
+      width: 30px; height: 30px;
+      background: var(--green-500);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .principle-body { font-size: 15px; color: var(--text-secondary); }
+    .principle-body strong { color: var(--text-primary); display: block; margin-bottom: 4px; font-size: 15px; }
+    .principle-body .action {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--green-600);
+      font-weight: 600;
+      background: var(--green-100);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 12px; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 18px;
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 8px;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      background: var(--green-500);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-body { font-size: 14px; color: var(--text-secondary); }
+    .step-body strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
+
+    /* Funnel visual */
+    .funnel-visual { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
+    .funnel-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--surface);
+      border: 1px solid var(--green-200);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .funnel-step .fs-label { font-weight: 700; color: var(--green-600); width: 110px; flex-shrink: 0; }
+    .funnel-step .fs-desc { color: var(--text-secondary); }
+    .funnel-arrow { text-align: center; color: var(--green-500); font-size: 16px; line-height: 1; }
+
+    /* Phase grid */
+    .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+    .phase-card {
+      background: var(--green-100);
+      border: 1px solid var(--green-200);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .phase-card .phase-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 4px;
+    }
+    .phase-card .phase-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+    .phase-card p { font-size: 13px; color: var(--text-secondary); padding-bottom: 2px; margin-bottom: 4px; }
+    .phase-card .phase-alert {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--green-700);
+      font-style: italic;
+      border-top: 1px solid var(--green-200);
+      padding-top: 8px;
+    }
+
+    /* Action table */
+    .action-table { width: 100%; border-collapse: collapse; }
+    .action-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      padding: 8px 14px;
+      border-bottom: 2px solid var(--green-200);
+    }
+    .action-table td {
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--green-200);
+      vertical-align: top;
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table td:first-child { font-weight: 700; color: var(--green-600); }
+
+    /* Conclusion */
+    .conclusion {
+      background: var(--green-700);
+      border-radius: 14px;
+      padding: 48px 40px;
+      color: #fff;
+      margin-top: 64px;
+    }
+    .conclusion .tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 16px;
+    }
+    .conclusion h2 { color: #fff; font-size: 32px; margin-bottom: 24px; }
+    .conclusion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .conclusion-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .conclusion-card .num { font-size: 22px; font-weight: 800; color: var(--green-300); margin-bottom: 8px; }
+    .conclusion-card p { font-size: 13px; color: rgba(255,255,255,.75); }
+    .formula-final {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .formula-arrow { color: var(--green-300); margin: 0 8px; }
+
+    /* Blog */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover {
+      border-color: var(--green-300);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(58,140,63,.08);
+    }
+    .blog-card-tag { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--green-500); margin-bottom: 10px; }
+    .blog-card h3 { font-size: 16px; font-weight: 700; line-height: 1.4; color: var(--text-primary); padding-bottom: 3px; flex: 1; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .blog-card-meta { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .blog-card-arrow { font-size: 16px; color: var(--green-500); font-weight: 700; }
+    .state-block { background: var(--green-100); border: 1px solid var(--green-200); border-radius: 10px; padding: 32px 28px; text-align: center; margin-bottom: 32px; }
+    .spinner { width: 24px; height: 24px; border: 2px solid var(--green-200); border-top-color: var(--green-500); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .blog-section-hero { max-width: 760px; margin: 0 auto; padding: 40px 32px 24px; }
+    .blog-section-title { font-size: 32px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; padding-bottom: 5px; letter-spacing: -.01em; }
+    .blog-section-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
+    .blog-section-content { max-width: 760px; margin: 0 auto; padding: 0 32px 60px; }
+
+    /* Footer */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 0 32px; }
+    .footer-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .footer-card { border: 1px solid var(--border); border-radius: 14px; padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; background: var(--surface); gap: 24px; margin-bottom: 32px; }
+    .footer-logo { flex-shrink: 0; }
+    .footer-logo img { height: 140px; width: auto; display: block; }
+    .footer-logo-placeholder { height: 140px; width: 140px; background: var(--text-primary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+    .footer-info { text-align: right; display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact p { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.6; padding-bottom: 0; }
+    .footer-contact a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
+    .footer-contact a:hover { text-decoration: underline; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .footer-brand-name { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    .footer-brand-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .footer-brand-tagline { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; border-top: 1px solid var(--border); gap: 16px; flex-wrap: wrap; }
+    .footer-bottom-left { font-size: 13px; color: var(--text-muted); }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .footer-nav a:hover { color: var(--text-primary); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { animation: fadeUp .6s ease both; }
+    .exec-summary { animation: fadeUp .6s .15s ease both; }
+    .section { animation: fadeUp .5s .1s ease both; }
+
+    @media (max-width: 640px) {
+      :root { --h1: 30px; --h2: 22px; --body: 15px; }
+      .nav-inner { padding: 0 16px; }
+      .nav-label { display: none; }
+      .hero { padding: 36px 16px 28px; }
+      h1 { font-size: 30px; line-height: 1.2; padding-bottom: 12px; }
+      .hero-sub { font-size: 16px; }
+      .hero-meta { gap: 12px; margin-top: 20px; padding-top: 16px; flex-wrap: wrap; }
+      .content { padding: 0 16px 60px; }
+      .exec-summary { padding: 18px 16px; margin-bottom: 36px; }
+      .exec-summary .formula { font-size: 13px; padding: 12px 14px; }
+      .section { margin-bottom: 44px; }
+      .section-desc { font-size: 15px; padding-bottom: 16px; margin-bottom: 20px; }
+      .block { padding: 16px; }
+      .block-grid { grid-template-columns: 1fr; gap: 12px; }
+      .phase-grid { grid-template-columns: 1fr; }
+      .step { padding: 12px 14px; gap: 12px; }
+      .conclusion { padding: 28px 20px; margin-top: 40px; border-radius: 10px; }
+      .conclusion h2 { font-size: 22px; margin-bottom: 16px; }
+      .conclusion-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+      .formula-final { font-size: 13px; padding: 16px; }
+      .footer-inner { padding: 0 16px; }
+      .footer-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 16px; }
+      .footer-logo img { height: 100px; }
+      .footer-info { text-align: left; }
+      .footer-brand { align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-nav { flex-wrap: wrap; gap: 12px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-card { padding: 18px 16px; }
+      .blog-section-hero { padding: 28px 16px 16px; }
+      .blog-section-content { padding: 0 16px 40px; }
+      h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="nav-inner">
+    <span class="nav-badge">Growth Framework</span>
+    <span class="nav-label">Fullstack Growth Marketing</span>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div style="max-width: 760px; margin: 0 auto; padding: 0 32px;">
+  <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/service.html" target="_blank">
+    <img src="../banner@2x.png" style="width: 100%; height: auto; display: block;">
+  </a>
+</div>
+<br>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Data-Driven Marketing</div>
+  <h1>Cách đọc chỉ số Marketing<br>để ra quyết định — không phải để báo cáo</h1>
+  <p class="hero-sub">Phần lớn doanh nghiệp đang nhìn vào data nhưng không biết phải làm gì với nó. Bài viết này xây hệ thống tư duy giúp bạn đọc đúng phễu, tìm đúng điểm nghẽn và biến số liệu thành đòn bẩy tăng trưởng thực sự.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item"><strong>Nguyễn Tấn Thịnh</strong></span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">10 phút đọc</span>
+    <span class="dot">·</span>
+    <span class="hero-meta-item">Dành cho SMEs &amp; Startups</span>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- EXEC SUMMARY -->
+  <div class="exec-summary">
+    <div class="label">Executive Summary</div>
+    <p>Phần lớn doanh nghiệp đang đọc số liệu sai cách — hoặc đo quá nhiều, hoặc đo sai thứ. Bài viết này xây dựng hệ thống tư duy 5 nguyên tắc cốt lõi, kết hợp framework <strong>AARRR + NSM + OMTM</strong> để giúp bạn đọc đúng phễu, tìm đúng điểm nghẽn và ra quyết định dựa trên data — không phải cảm tính.</p>
+    <div class="formula">
+      Đọc số theo phễu &nbsp;→&nbsp; Xác định điểm nghẽn &nbsp;→&nbsp; Gắn với hành động &nbsp;=&nbsp; Data tạo ra doanh thu
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-number">Phần I</div>
+    <h2>5 Nguyên tắc khi đọc số liệu</h2>
+    <p class="section-desc">Trước khi nhìn vào bất kỳ dashboard nào, bạn cần nắm rõ một sự thật: số liệu không có ý nghĩa nếu không gắn với quyết định.</p>
+
+    <div class="block-insight" style="margin-bottom: 24px;">
+      <p>Số liệu không có ý nghĩa nếu không gắn với quyết định. Đây là nguyên tắc số một — và cũng là thứ phần lớn doanh nghiệp đang bỏ qua.</p>
+    </div>
+
+    <div class="principle-list">
+      <div class="principle-item">
+        <div class="principle-num">1</div>
+        <div class="principle-body">
+          <strong>Đọc số liệu theo phễu — không đọc rời rạc</strong>
+          Marketing là một hệ thống chuyển đổi, không phải tập hợp chỉ số riêng lẻ. Reach cao nhưng không có lead → vấn đề ở content hoặc target. Lead nhiều nhưng không ra đơn → vấn đề ở chất lượng lead hoặc sales.
+          <span class="action">→ Luôn nhìn theo dòng chảy: Traffic → Lead → Khách hàng → Doanh thu</span>
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">2</div>
+        <div class="principle-body">
+          <strong>Mỗi chỉ số phải gắn với một hành động cụ thể</strong>
+          Nếu bạn không biết phải làm gì khi nhìn thấy một con số — đó là số liệu vô nghĩa. CTR thấp → test lại content / hook. CPL cao → tối ưu landing page hoặc target. CR thấp → xem lại offer hoặc sales.
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">3</div>
+        <div class="principle-body">
+          <strong>Không tối ưu "điểm đẹp" — chỉ tối ưu "điểm nghẽn"</strong>
+          Sai lầm phổ biến: chỉ số nào dễ cải thiện thì làm, thay vì chỉ số ảnh hưởng lớn nhất. Tư duy đúng: xác định OMTM (One Metric That Matters) và tập trung vào điểm yếu nhất trong phễu.
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">4</div>
+        <div class="principle-body">
+          <strong>So sánh theo chuẩn (Benchmark) — không nhìn số tuyệt đối</strong>
+          Một CPL 50k là rẻ hay đắt? Không có câu trả lời nếu không có benchmark. Nguồn tham chiếu: dữ liệu nội bộ, dữ liệu ngành, và đối thủ cạnh tranh.
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">5</div>
+        <div class="principle-body">
+          <strong>Đo đủ để ra quyết định — không đo cho "đầy dashboard"</strong>
+          SMEs không cần hệ thống phức tạp. Chỉ cần biết: khách đến từ đâu, mua gì, bao nhiêu tiền, có quay lại không.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-number">Phần II</div>
+    <h2>Hệ thống chỉ số theo hành trình khách hàng</h2>
+    <p class="section-desc">Khung tư duy AARRR là "bản đồ" để bạn không đọc sai data — và biết chính xác mình đang đứng ở đâu trong hành trình tăng trưởng.</p>
+
+    <div class="block" style="margin-bottom: 24px;">
+      <div class="block-title">Khung tư duy tổng thể: AARRR Funnel</div>
+      <div class="funnel-visual">
+        <div class="funnel-step">
+          <span class="fs-label">Acquisition</span>
+          <span class="fs-desc">Thu hút đúng người vào phễu của bạn</span>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <span class="fs-label">Activation</span>
+          <span class="fs-desc">Tạo hành động đầu tiên có giá trị</span>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <span class="fs-label">Retention</span>
+          <span class="fs-desc">Giữ chân người dùng quay lại</span>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <span class="fs-label">Revenue</span>
+          <span class="fs-desc">Chuyển đổi thành doanh thu thực</span>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <span class="fs-label">Referral</span>
+          <span class="fs-desc">Khuếch đại qua viral loop tự nhiên</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-label">Giai đoạn 1</div>
+        <div class="phase-title">Awareness — Tiếp cận</div>
+        <p><strong>Reach</strong> — Có bao nhiêu người thấy bạn</p>
+        <p><strong>Impression</strong> — Tần suất hiển thị</p>
+        <p><strong>CPM</strong> — Chi phí để tiếp cận 1.000 người</p>
+        <p><strong>CTR</strong> — Mức độ hấp dẫn của nội dung</p>
+        <div class="phase-alert">CTR thấp → vấn đề ở content · CPM cao → vấn đề ở target</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Giai đoạn 2</div>
+        <div class="phase-title">Consideration — Quan tâm</div>
+        <p><strong>CPL</strong> — Chi phí để có 1 lead</p>
+        <p><strong>Landing Page Views</strong> — Số người thực sự quan tâm</p>
+        <p><strong>Bounce Rate</strong> — Chất lượng trải nghiệm trang</p>
+        <p><strong>Session Duration</strong> — Mức độ đọc nội dung</p>
+        <div class="phase-alert">Bounce cao → content không đúng kỳ vọng · CPL cao → funnel chưa tối ưu</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Giai đoạn 3</div>
+        <div class="phase-title">Conversion — Chuyển đổi</div>
+        <p><strong>CR</strong> — Tỷ lệ chuyển đổi thành khách</p>
+        <p><strong>CPA</strong> — Chi phí để có 1 khách hàng</p>
+        <p><strong>ROAS</strong> — Hiệu quả sinh lời của quảng cáo</p>
+        <p><strong>Doanh thu</strong> — Kết quả cuối cùng thực tế</p>
+        <div class="phase-alert">CR thấp → vấn đề ở offer / sales · CPA cao → acquisition không hiệu quả</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Giai đoạn 4</div>
+        <div class="phase-title">Retention &amp; Referral</div>
+        <p><strong>% Quay lại</strong> — Khách có trung thành không</p>
+        <p><strong>LTV</strong> — Giá trị vòng đời khách hàng</p>
+        <p><strong>Referral Rate</strong> — Khách có giới thiệu người khác</p>
+        <p><strong>LTV / CAC ratio</strong> — Chỉ số sức khoẻ kinh doanh</p>
+        <div class="phase-alert">Đây là "mỏ vàng" nhưng thường bị bỏ qua nhất</div>
+      </div>
+    </div>
+
+    <div class="block-insight">
+      <p>Retention &amp; Referral là giai đoạn tạo ra tăng trưởng phi tuyến — nhưng hầu hết doanh nghiệp chỉ nhìn vào Acquisition. Đó là lý do tại sao chi phí marketing ngày càng tăng mà doanh thu lại không tăng tương ứng.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-number">Phần III</div>
+    <h2>Nhóm chỉ số theo vai trò trong tổ chức</h2>
+    <p class="section-desc">Không phải ai cũng cần đọc cùng một bộ chỉ số. Sai lầm phổ biến là CEO lo CTR còn nhân viên marketing lại lo ROAS — hoàn toàn ngược chiều.</p>
+
+    <div class="block-grid">
+      <div class="block">
+        <div class="block-title">Nhân viên Marketing đọc gì?</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Tập trung vào tối ưu hành động hàng ngày</p>
+        <p>• <strong>Content:</strong> Reach, Engagement, Saves</p>
+        <p>• <strong>Ads:</strong> CTR, CPC, CPM, Frequency</p>
+        <p>• <strong>Lead:</strong> CPL, tỷ lệ điền form, chất lượng lead</p>
+        <p>• <strong>Landing:</strong> Bounce rate, time on site</p>
+        <p style="margin-top: 10px; font-size: 13px; color: var(--green-600); font-weight: 600;">Mục tiêu: cải thiện từng bước nhỏ mỗi ngày</p>
+      </div>
+      <div class="block">
+        <div class="block-title">CEO / Founder đọc gì?</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Tập trung vào dòng tiền và quyết định đầu tư</p>
+        <p>• <strong>Doanh thu:</strong> Có tăng không? Tăng từ đâu?</p>
+        <p>• <strong>CAC:</strong> Chi phí mua khách đang là bao nhiêu?</p>
+        <p>• <strong>LTV:</strong> Một khách hàng đáng giá bao nhiêu?</p>
+        <p>• <strong>ROAS:</strong> Tiền đầu tư ads có sinh lời không?</p>
+        <p style="margin-top: 10px; font-size: 13px; color: var(--green-600); font-weight: 600;">Mục tiêu: quyết định scale hay dừng</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-number">Phần IV</div>
+    <h2>Framework 5 bước đọc số liệu để ra quyết định</h2>
+    <p class="section-desc">Không chỉ đọc — mà đọc đúng trình tự. Đây là hệ thống thực chiến để biến data thành hành động cụ thể, không phải slide báo cáo.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">B1</div>
+        <div class="step-body">
+          <strong>Xác định mục tiêu — North Star Metric (NSM)</strong>
+          Không phải mọi chỉ số đều quan trọng như nhau. NSM phải phản ánh giá trị cốt lõi sản phẩm mang lại. Spa → % khách quay lại. Ecommerce → Doanh thu / khách hàng. SaaS → Số người dùng active hàng tuần.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B2</div>
+        <div class="step-body">
+          <strong>Xác định điểm nghẽn — OMTM (One Metric That Matters)</strong>
+          Nhìn vào phễu → tìm chỗ yếu nhất → tập trung cải thiện duy nhất điểm đó. Reach cao → Lead thấp → Fix content. Lead nhiều → Không chốt → Fix sales script.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B3</div>
+        <div class="step-body">
+          <strong>Rà soát theo tầng từ trên xuống (Top-down)</strong>
+          Thứ tự đúng: Awareness → Consideration → Conversion. Nếu trên phễu sai thì dưới phễu tối ưu là vô nghĩa. Đừng cố giảm CPA khi CTR đang quá thấp.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B4</div>
+        <div class="step-body">
+          <strong>Gắn mỗi chỉ số với một hành động cụ thể</strong>
+          Mỗi chỉ số xấu phải dẫn đến một hành động rõ ràng — không phải một cuộc họp thêm. Xem bảng hành động bên dưới để tham khảo cách áp dụng.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B5</div>
+        <div class="step-body">
+          <strong>Lặp lại — Test — Tối ưu liên tục</strong>
+          Marketing không phải "đúng ngay từ đầu" mà là hệ thống thử – sai – tối ưu liên tục. Mỗi vòng lặp phải ngắn hơn, dữ liệu phải rõ hơn, quyết định phải nhanh hơn.
+        </div>
+      </div>
+    </div>
+
+    <div class="block" style="margin-top: 24px;">
+      <div class="block-title">Bảng gắn chỉ số với hành động thực chiến</div>
+      <table class="action-table">
+        <thead>
+          <tr>
+            <th>Chỉ số</th>
+            <th>Dấu hiệu cần chú ý</th>
+            <th>Hành động tiếp theo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTR</td>
+            <td>Thấp hơn benchmark ngành</td>
+            <td>Test lại creative / hook trong 7 ngày</td>
+          </tr>
+          <tr>
+            <td>CPL</td>
+            <td>Cao hơn 20% so với tháng trước</td>
+            <td>Tối ưu landing page hoặc thu hẹp target</td>
+          </tr>
+          <tr>
+            <td>CR</td>
+            <td>Thấp dù traffic tốt</td>
+            <td>Cải thiện offer hoặc sales script</td>
+          </tr>
+          <tr>
+            <td>ROAS</td>
+            <td>Dưới ngưỡng hoà vốn</td>
+            <td>Dừng creative cũ, test creative mới ngay</td>
+          </tr>
+          <tr>
+            <td>% Quay lại</td>
+            <td>Giảm liên tục qua các tháng</td>
+            <td>Review trải nghiệm sau mua, cải thiện onboarding</td>
+          </tr>
+          <tr>
+            <td>LTV / CAC</td>
+            <td>Tỷ lệ dưới 3x</td>
+            <td>Tăng giá trị đơn hàng hoặc giảm chi phí acquisition</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block-insight" style="margin-top: 20px;">
+      <p>Data không phải công cụ để báo cáo lên cấp trên. Data là nền tảng để ra quyết định đúng — và quyết định đúng là thứ duy nhất tạo ra doanh thu bền vững.</p>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <div class="tag">Kết luận &amp; Mindset</div>
+    <h2>Data không phải để báo cáo — mà để ra quyết định</h2>
+    <div class="conclusion-grid">
+      <div class="conclusion-card">
+        <div class="num">01</div>
+        <p>Luôn đọc số theo phễu — không đọc từng chỉ số rời rạc</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="num">02</div>
+        <p>Mỗi chỉ số phải gắn với một hành động — không có ngoại lệ</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="num">03</div>
+        <p>Tập trung vào điểm nghẽn lớn nhất — không tối ưu lung tung</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="num">04</div>
+        <p>Ưu tiên dòng tiền trước — tối ưu chi tiết sau khi nền vững</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="num">05</div>
+        <p>Xây tracking đơn giản nhưng nhất quán — đủ để ra quyết định</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="num">06</div>
+        <p>Marketing hiện đại là data-driven nhưng không phải data-heavy</p>
+      </div>
+    </div>
+    <div class="formula-final">
+      NSM (mục tiêu rõ) <span class="formula-arrow">→</span> AARRR (đọc đúng phễu) <span class="formula-arrow">→</span> OMTM (tập trung điểm nghẽn) <span class="formula-arrow">=</span> Data tạo ra tăng trưởng bền vững
+    </div>
+    <p style="color:rgba(255,255,255,.65); font-size:14px; margin-top:20px; text-align:center;">SMEs không cần nhiều data — chỉ cần đúng data, đúng thời điểm, đúng quyết định.</p>
+  </div>
+
+</div>
+
+<!-- BLOG SECTION -->
+<div id="myblog-placeholder"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-card">
+      <div class="footer-logo">
+        <img src="../logo.gif" alt="Entity Studio logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="footer-logo-placeholder" style="display:none;">ES</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-contact">
+          <p>Nguyễn Tấn Thịnh</p>
+          <a href="mailto:nguyentanthinh105@gmail.com">nguyentanthinh105@gmail.com</a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-brand-name">entity studio</span>
+          <span class="footer-brand-title">Fullstack Growth Marketing</span>
+          <span class="footer-brand-tagline">PMF → Strategy → Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-left">© 2025 Entity Studio · Fun fact: 70% trang web này được tạo bởi AI</span>
+      <nav class="footer-nav">
+        <a href="#">PMF</a>
+        <a href="#">Data</a>
+        <a href="#">PLG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+const myBlogHTML = `
+  <div class="blog-section-hero">
+    <h2 class="blog-section-title">Các bài blog của tôi</h2>
+    <p class="blog-section-sub">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+    <a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/"
+       target="_blank" rel="noopener" style="text-decoration: none;">
+      <span class="nav-badge">Xem tất cả bài viết của tôi</span>
+    </a>
+  </div>
+  <div class="blog-section-content">
+    <div id="blog-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+`;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
+
+const GITHUB_USER     = 'nguyentanthinh105-create';
+const GITHUB_REPO     = 'Marketing-Blog';
+const ARTICLES_FOLDER = 'new-article';
+const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+function parseMetaFromHTML(html) {
+  const getMeta = (name) => {
+    const m = html.match(new RegExp('<meta[^>]+name=["\']' + name + '["\'][^>]+content=["\']([^"\']*)["\']', 'i'))
+           || html.match(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+name=["\']' + name + '["\']', 'i'));
+    return m ? m[1].trim() : null;
+  };
+  const getTitle = () => { const m = html.match(/<title[^>]*>([^<]+)<\/title>/i); return m ? m[1].trim() : null; };
+  return {
+    category:    getMeta('category')    || 'Article',
+    description: getMeta('description') || '',
+    title:       getMeta('title')       || getTitle() || 'Bài viết'
+  };
+}
+
+async function loadBlogs() {
+  const stateEl = document.getElementById('blog-state');
+  const gridEl  = document.getElementById('blog-grid');
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('GitHub API error');
+    const files    = await res.json();
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+    if (articles.length === 0) { stateEl.innerHTML = `<div>Không có bài viết nào.</div>`; return; }
+    stateEl.style.display = 'none';
+    gridEl.style.display  = 'grid';
+    const blogPromises = articles.map(async (file) => {
+      try {
+        const href     = PAGES_BASE_URL + file.name;
+        const response = await fetch(href);
+        const htmlText = await response.text();
+        const { category, description, title } = parseMetaFromHTML(htmlText);
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = href;
+        card.target    = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          ${description ? `<p class="blog-card-meta" style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.5;">${description}</p>` : ''}
+          <div class="blog-card-footer"><span class="blog-card-arrow">Đọc thêm →</span></div>`;
+        return card;
+      } catch (e) { return null; }
+    });
+    const cards = await Promise.all(blogPromises);
+    cards.forEach(card => { if (card) gridEl.appendChild(card); });
+  } catch (err) {
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
+  }
+}
+loadBlogs();
+</script>
+</body>
+</html>
