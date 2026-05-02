@@ -949,16 +949,19 @@ function switchTab(id, btn) {
   btn.classList.add('active');
 }
 
-// ── INJECT BLOG SECTION LAYOUT ──
-document.getElementById('myblog-placeholder').innerHTML = `
-  <div class="blogs-section-wrap">
-    <div class="blogs-section-header">
-      <div>
-        <div class="blogs-section-label">From the blog</div>
-        <div class="blogs-section-title">Các bài viết của tôi</div>
-        <div class="blogs-section-desc">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — từ trải nghiệm thực chiến.</div>
-      </div>
-    </div>
+// 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
+const myBlogHTML = `
+  <div class="blog-section-hero">
+    <h2 class="blog-section-title">Các bài blog của tôi</h2>
+    <p class="blog-section-sub">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+<a href="https://nguyentanthinh105-create.github.io/Marketing-Blog/" 
+   target="_blank" 
+   rel="noopener" 
+   style="text-decoration: none;">
+  <span class="nav-badge">Xem tất cả bài viết của tôi</span>
+</a>
+  </div>
+  <div class="blog-section-content">
     <div id="blog-state" class="state-block">
       <div class="spinner"></div>
       <div class="state-title">Đang tải bài viết...</div>
@@ -966,27 +969,31 @@ document.getElementById('myblog-placeholder').innerHTML = `
     <div id="blog-grid" class="blog-grid" style="display:none;"></div>
   </div>
 `;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
 
-// ── FETCH BLOGS FROM GITHUB (.MD FILES) ──
+// 3. LOGIC LẤY META TỪ FILE HTML
 const GITHUB_USER     = 'nguyentanthinh105-create';
 const GITHUB_REPO     = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
-const RAW_BASE_URL    = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/${ARTICLES_FOLDER}/`;
 const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
 const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
 
-function parseFrontmatter(text) {
-  const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const result = {};
-  for (const line of match[1].split('\n')) {
-    const sep = line.indexOf(':');
-    if (sep === -1) continue;
-    const key = line.slice(0, sep).trim();
-    const val = line.slice(sep + 1).trim().replace(/^["']|["']$/g, '');
-    result[key] = val;
-  }
-  return result;
+/* ── Parse category, description, title từ meta tags trong HTML ── */
+function parseMetaFromHTML(html) {
+  const getMeta = (name) => {
+    const m = html.match(new RegExp('<meta[^>]+name=["\']' + name + '["\'][^>]+content=["\']([^"\']*)["\']', 'i'))
+           || html.match(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+name=["\']' + name + '["\']', 'i'));
+    return m ? m[1].trim() : null;
+  };
+  const getTitle = () => {
+    const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    return m ? m[1].trim() : null;
+  };
+  return {
+    category:    getMeta('category')    || 'Article',
+    description: getMeta('description') || '',
+    title:       getMeta('title')       || getTitle() || 'Bài viết'
+  };
 }
 
 async function loadBlogs() {
@@ -995,53 +1002,54 @@ async function loadBlogs() {
 
   try {
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    if (!res.ok) throw new Error(`GitHub API error`);
 
     const files    = await res.json();
-    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.md'));
+    // Chỉ đọc file .html
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
     if (articles.length === 0) {
-      stateEl.innerHTML = `<div class="state-title">Chưa có bài viết nào</div><div>Thêm file .md vào thư mục ${ARTICLES_FOLDER} trên GitHub.</div>`;
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
       return;
     }
 
     stateEl.style.display = 'none';
     gridEl.style.display  = 'grid';
 
-    const cards = await Promise.all(articles.map(async (file) => {
+    const blogPromises = articles.map(async (file) => {
       try {
-        const mdText = await (await fetch(RAW_BASE_URL + file.name)).text();
-        const meta   = parseFrontmatter(mdText);
-
-        const category    = meta.category    || 'Article';
-        const description = meta.description || '';
-        const title       = meta.title       || file.name.replace('.md', '').replace(/[-_]/g, ' ');
-        const href        = PAGES_BASE_URL   + file.name.replace('.md', '.html');
+        const href     = PAGES_BASE_URL + file.name;
+        const response = await fetch(href);
+        const htmlText = await response.text();
+        const { category, description, title } = parseMetaFromHTML(htmlText);
 
         const card = document.createElement('a');
         card.className = 'blog-card';
         card.href      = href;
         card.target    = '_blank';
-        card.rel       = 'noopener';
         card.innerHTML = `
           <div class="blog-card-tag">${category}</div>
           <h3>${title}</h3>
-          ${description ? `<p style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.5;flex:1;">${description}</p>` : ''}
+          ${description ? `<p class="blog-card-meta" style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.5;">${description}</p>` : ''}
           <div class="blog-card-footer">
             <span class="blog-card-arrow">Đọc thêm →</span>
           </div>`;
         return card;
-      } catch (e) { return null; }
-    }));
+      } catch (e) {
+        console.error("Lỗi đọc file:", file.name);
+        return null;
+      }
+    });
 
+    const cards = await Promise.all(blogPromises);
     cards.forEach(card => { if (card) gridEl.appendChild(card); });
 
   } catch (err) {
-    stateEl.innerHTML = `<div class="state-title" style="color:#c0392b;">Không thể tải bài viết</div><div>${err.message}</div>`;
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
   }
 }
 
-loadBlogs();
+  loadBlogs();
 </script>
 </body>
 </html>
