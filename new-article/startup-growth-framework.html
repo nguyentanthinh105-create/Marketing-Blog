@@ -474,6 +474,85 @@
     .hero { animation: fadeUp .6s ease both; }
     .exec-summary { animation: fadeUp .6s .15s ease both; }
     .section { animation: fadeUp .5s .1s ease both; }
+
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 640px) {
+      :root {
+        --h1: 30px;
+        --h2: 22px;
+        --body: 15px;
+      }
+
+      /* Nav */
+      .nav-inner { padding: 0 16px; }
+      .nav-label { display: none; }
+
+      /* Banner */
+      div[style*="padding: 0 32px"] { padding: 0 16px !important; }
+
+      /* Hero */
+      .hero { padding: 36px 16px 28px; }
+      h1 { font-size: 30px; line-height: 1.2; padding-bottom: 12px; }
+      .hero-sub { font-size: 16px; }
+      .hero-meta { gap: 12px; margin-top: 20px; padding-top: 16px; flex-wrap: wrap; }
+
+      /* Content */
+      .content { padding: 0 16px 60px; }
+
+      /* Executive Summary */
+      .exec-summary { padding: 18px 16px; margin-bottom: 36px; }
+      .exec-summary .formula { font-size: 13px; padding: 12px 14px; word-break: keep-all; }
+
+      /* Section */
+      .section { margin-bottom: 44px; }
+      .section-desc { font-size: 15px; padding-bottom: 16px; margin-bottom: 20px; }
+
+      /* Blocks */
+      .block { padding: 16px; }
+      .block-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Steps */
+      .step { padding: 12px 14px; gap: 12px; }
+
+      /* Example row — 3 cols → 1 col */
+      .example-row { grid-template-columns: 1fr; }
+
+      /* Funnel table — make scrollable */
+      .funnel-table { font-size: 13px; }
+      .funnel-table th, .funnel-table td { padding: 8px 8px; }
+      .block:has(.funnel-table) { overflow-x: auto; padding: 16px 12px; }
+
+      /* Conclusion */
+      .conclusion { padding: 28px 20px; margin-top: 40px; border-radius: 10px; }
+      .conclusion h2 { font-size: 22px; margin-bottom: 16px; }
+      .conclusion .pitfalls { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+      .formula-final { font-size: 14px; padding: 16px; word-break: keep-all; }
+
+      /* Footer */
+      .footer-inner { padding: 0 16px; }
+      .footer-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 16px;
+      }
+      .footer-logo img { height: 100px; }
+      .footer-info { text-align: left; }
+      .footer-brand { align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-nav { flex-wrap: wrap; gap: 12px; }
+
+      /* Blog section */
+      .blogs-section-wrap { padding: 36px 16px 48px; }
+      .blogs-section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-card { padding: 18px 16px; }
+    }
+
+    @media (max-width: 380px) {
+      :root { --h1: 26px; --h2: 20px; }
+      .conclusion .pitfalls { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -816,12 +895,27 @@ document.getElementById('myblog-placeholder').innerHTML = `
   </div>
 `;
 
-// ── FETCH BLOGS FROM GITHUB ──
+// ── FETCH BLOGS FROM GITHUB (.MD FILES) ──
 const GITHUB_USER     = 'nguyentanthinh105-create';
 const GITHUB_REPO     = 'Marketing-Blog';
 const ARTICLES_FOLDER = 'new-article';
-const BASE_URL        = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const RAW_BASE_URL    = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/${ARTICLES_FOLDER}/`;
+const PAGES_BASE_URL  = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
 const API_URL         = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+function parseFrontmatter(text) {
+  const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const result = {};
+  for (const line of match[1].split('\n')) {
+    const sep = line.indexOf(':');
+    if (sep === -1) continue;
+    const key = line.slice(0, sep).trim();
+    const val = line.slice(sep + 1).trim().replace(/^["']|["']$/g, '');
+    result[key] = val;
+  }
+  return result;
+}
 
 async function loadBlogs() {
   const stateEl = document.getElementById('blog-state');
@@ -832,10 +926,10 @@ async function loadBlogs() {
     if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
 
     const files    = await res.json();
-    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.md'));
 
     if (articles.length === 0) {
-      stateEl.innerHTML = `<div class="state-title">Chưa có bài viết nào</div><div>Thêm file .html vào thư mục ${ARTICLES_FOLDER} trên GitHub.</div>`;
+      stateEl.innerHTML = `<div class="state-title">Chưa có bài viết nào</div><div>Thêm file .md vào thư mục ${ARTICLES_FOLDER} trên GitHub.</div>`;
       return;
     }
 
@@ -844,15 +938,17 @@ async function loadBlogs() {
 
     const cards = await Promise.all(articles.map(async (file) => {
       try {
-        const html = await (await fetch(BASE_URL + file.name)).text();
-        const doc  = new DOMParser().parseFromString(html, 'text/html');
-        const category    = doc.querySelector('meta[name="category"]')?.content || 'Article';
-        const description = doc.querySelector('meta[name="description"]')?.content || '';
-        const title       = doc.title || file.name.replace('.html', '').replace(/[-_]/g, ' ');
+        const mdText = await (await fetch(RAW_BASE_URL + file.name)).text();
+        const meta   = parseFrontmatter(mdText);
+
+        const category    = meta.category    || 'Article';
+        const description = meta.description || '';
+        const title       = meta.title       || file.name.replace('.md', '').replace(/[-_]/g, ' ');
+        const href        = PAGES_BASE_URL   + file.name.replace('.md', '.html');
 
         const card = document.createElement('a');
         card.className = 'blog-card';
-        card.href      = BASE_URL + file.name;
+        card.href      = href;
         card.target    = '_blank';
         card.rel       = 'noopener';
         card.innerHTML = `
