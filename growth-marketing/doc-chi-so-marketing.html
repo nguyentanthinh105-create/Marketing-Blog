@@ -510,7 +510,8 @@
     <span class="dot">·</span>
     <span class="hero-meta-item">10 phút đọc</span>
     <span class="dot">·</span>
-    <span class="hero-meta-item">Growth Marketing</span>
+    <!-- Thêm id="post-category" vào đây -->
+  <span class="hero-meta-item" id="post-category">Loading...</span>
   </div>
 </div>
 
@@ -853,6 +854,23 @@
 </footer>
 
 <script>
+  // Đợi nội dung trang tải xong
+document.addEventListener('DOMContentLoaded', function() {
+  // Tìm thẻ meta có name là "category"
+  const categoryMeta = document.querySelector('meta[name="category"]');
+  // Tìm vị trí hiển thị trên giao diện
+  const categoryDisplay = document.getElementById('post-category');
+
+  if (categoryMeta && categoryDisplay) {
+    // Lấy nội dung từ thuộc tính content của thẻ meta
+    const categoryName = categoryMeta.getAttribute('content');
+    // Hiển thị ra màn hình
+    categoryDisplay.textContent = categoryName;
+  } else if (categoryDisplay) {
+    // Nếu không tìm thấy thẻ meta, hiển thị giá trị mặc định
+    categoryDisplay.textContent = 'General';
+  }
+});
 const myBlogHTML = `
   <div class="blog-section-hero">
     <h2 class="blog-section-title">Các bài blog của tôi</h2>
