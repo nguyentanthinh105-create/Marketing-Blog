@@ -531,100 +531,100 @@
 </footer>
 
 <script>
-  const GITHUB_USER = 'nguyentanthinh105-create';
-  const GITHUB_REPO = 'Marketing-Blog';
-  const BASE        = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}`;
-  const API_BASE    = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents`;
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
-  const FOLDERS = {
-    latest:   'new-article',
-    growth:   'growth-marketing',
-    ai:       'ai-marketing',
-    branding: 'branding'
-  };
+// 2. LAYOUT BLOG (Đã xóa post-count)[cite: 1]
+const myBlogHTML = `
+  <div class="hero" style="padding: 40px 32px 24px; max-width: 860px;">
+    <h2 style="font-size: 32px; margin-bottom: 8px;">Các bài blog của tôi</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 16px;">Tổng hợp các bài viết về Growth Marketing, AI Marketing và Branding — được viết từ trải nghiệm thực chiến, không phải lý thuyết sách vở.</p>
+  </div>
+  <div class="content" style="max-width: 860px; margin: 0 auto; padding: 0 32px 60px;">
+    <div id="blog-state" class="state-block">
+      <div class="spinner"></div>
+      <div class="state-title">Đang tải bài viết...</div>
+    </div>
+    <div id="blog-grid" class="blog-grid" style="display:none;"></div>
+  </div>
+`;
+document.getElementById('myblog-placeholder').innerHTML = myBlogHTML;
 
-  /* ── helpers ── */
-  async function fetchArticles(folder) {
-    const res = await fetch(`${API_BASE}/${folder}`);
-    if (!res.ok) throw new Error(`API error ${res.status}`);
+// 3. LOGIC LẤY META TRỰC TIẾP TỪ NỘI DUNG FILE
+const GITHUB_USER    = 'nguyentanthinh105-create';
+const GITHUB_REPO    = 'Marketing-Blog';
+const ARTICLES_FOLDER = 'new-article';
+const BASE_URL       = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${ARTICLES_FOLDER}/`;
+const API_URL        = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTICLES_FOLDER}`;
+
+async function loadBlogs() {
+  const stateEl = document.getElementById('blog-state');
+  const gridEl  = document.getElementById('blog-grid');
+
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`GitHub API error`);
+
     const files = await res.json();
-    return files.filter(f => f.type === 'file' && f.name.endsWith('.md'));
-  }
+    const articles = files.filter(f => f.type === 'file' && f.name.endsWith('.html'));
 
-  async function buildCard(file, folder) {
-    try {
-      const text = await (await fetch(`${BASE}/${folder}/${file.name}`)).text();
-
-      // HTML-comment meta: <!-- category: X -->
-      const getMeta = (key) => {
-        const m = text.match(new RegExp('<!--\\s*' + key + ':\\s*(.+?)\\s*-->', 'i'));
-        return m ? m[1].trim() : null;
-      };
-      // YAML front-matter: key: value (between --- delimiters or loose)
-      const getYaml = (key) => {
-        const m = text.match(new RegExp('^' + key + ':\\s*["\']?(.+?)["\']?\\s*$', 'mi'));
-        return m ? m[1].trim() : null;
-      };
-
-      const category    = getMeta('category')    || getYaml('category')    || 'Article';
-      const description = getMeta('description') || getYaml('description') || '';
-      const titleMeta   = getMeta('title')        || getYaml('title');
-      const titleH1     = (text.match(/^#\s+(.+)/m) || [])[1];
-      const title       = titleMeta || titleH1 || file.name.replace('.md','').replace(/[-_]/g,' ');
-
-      // Link to rendered page (GitHub Pages renders .md → same path without extension, or .html)
-      const href = `${BASE}/${folder}/${file.name.replace('.md', '.html')}`;
-
-      const card = document.createElement('a');
-      card.className = 'blog-card';
-      card.href   = href;
-      card.target = '_blank';
-      card.rel    = 'noopener';
-      card.innerHTML = `
-        <div class="blog-card-tag">${category}</div>
-        <h3>${title}</h3>
-        ${description ? `<p class="blog-card-meta">${description}</p>` : ''}
-        <div class="blog-card-footer">
-          <span class="blog-card-arrow">Đọc thêm →</span>
-        </div>`;
-      return card;
-    } catch { return null; }
-  }
-
-  async function loadSection(key) {
-    const folder   = FOLDERS[key];
-    const stateEl  = document.getElementById(`${key}-state`);
-    const gridEl   = document.getElementById(`${key}-grid`);
-    try {
-      const articles = await fetchArticles(folder);
-      if (!articles.length) {
-        stateEl.innerHTML = `<div class="state-title">Chưa có bài viết trong chủ đề này.</div>`;
-        return;
-      }
-      const cards = await Promise.all(articles.map(f => buildCard(f, folder)));
-      stateEl.style.display = 'none';
-      gridEl.style.display  = 'grid';
-      cards.forEach(c => { if (c) gridEl.appendChild(c); });
-    } catch (err) {
-      stateEl.innerHTML = `<div class="state-title" style="color:#c0392b;">Không thể tải bài viết.</div><div style="font-size:13px;">${err.message}</div>`;
+    if (articles.length === 0) {
+      stateEl.innerHTML = `<div>Không có bài viết nào trong thư mục ${ARTICLES_FOLDER}.</div>`;
+      return;
     }
+
+    stateEl.style.display = 'none';
+    gridEl.style.display  = 'grid';
+
+    // Xử lý song song để tăng tốc độ tải trang
+    const blogPromises = articles.map(async (file) => {
+      try {
+        const response = await fetch(BASE_URL + file.name);
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+
+        // TRUY XUẤT META CHÍNH XÁC TỪ FILE
+        const category = doc.querySelector('meta[name="category"]')?.getAttribute('content') || "Chưa phân loại";
+        const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || "Không có mô tả cho bài viết này.";
+        const title = doc.title || file.name.replace('.html', '');
+
+        const card = document.createElement('a');
+        card.className = 'blog-card';
+        card.href      = BASE_URL + file.name;
+        card.target    = '_blank';
+        card.innerHTML = `
+          <div class="blog-card-tag">${category}</div>
+          <h3>${title}</h3>
+          <p class="blog-card-meta" style="font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">
+            ${description}
+          </p>
+          <div class="blog-card-footer">
+            <span class="blog-card-arrow">Đọc thêm →</span>
+          </div>`;
+        return card;
+      } catch (e) {
+        console.error("Lỗi đọc meta của file:", file.name);
+        return null;
+      }
+    });
+
+    const cards = await Promise.all(blogPromises);
+    cards.forEach(card => {
+      if (card) gridEl.appendChild(card);
+    });
+
+  } catch (err) {
+    stateEl.innerHTML = `<div style="color:red;">Lỗi kết nối dữ liệu bài viết.</div>`;
   }
+}
 
-  /* ── tab switcher with lazy load ── */
-  const loaded = { latest: false, growth: false, ai: false, branding: false };
+loadBlogs();
 
-  function switchTopicTab(key, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + key).classList.add('active');
-    btn.classList.add('active');
-    if (!loaded[key]) { loaded[key] = true; loadSection(key); }
-  }
-
-  /* ── initial load ── */
-  loadSection('latest');
-  loadSection('growth'); // preload first tab
-  loaded.growth = true;
 </script>
 </body>
 </html>
